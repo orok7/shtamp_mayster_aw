@@ -1,12 +1,69 @@
 header {
     width: calc(100% - 6px);
     height: 100px;
-    margin: 0;
+    margin: 50px 0 50px;
+    /*margin-top: 30px;*/
     padding: 3px;
-    min-width: 573px
+    text-align: right;
+    min-width: 1023px
+}
+
+header table {
+    margin: 0 0 0 220px;
+    font-size: large;
+    font-weight: normal;
+    text-align: right;
+    color: white;
+}
+
+header table a {
+    color: #fff;
+    text-decoration: none;
+}
+header td{
+    padding: 0 15px 0 0;
 }
 
 .logo {
-    width: 150px;
-    height: 100%
+    position: absolute;
+    top: 13px;
+    left: 25px;
+    width: 170px;
+    height: 170px;
+    border-radius: 150px;
+    /*background: #f0f0be url("/pages/img/logo_small.png") round;*/
+    /*border: solid 5px #f0f0be;*/
+    background: #0064be url("/pages/img/logo_small_white.png") round;
+    border: solid 5px #0064be;
+    transition: 1s
 }
+
+.logo:hover {
+    background: #f0f0be url("/pages/img/logo_small.png") round;
+    border: solid 5px #f0f0be;
+    /*background: #0064be url("/pages/img/logo_small_white.png") round;*/
+    /*border: solid 5px #0064be*/
+}
+
+.search_form {
+    height: 30px;
+    width: 775px;
+    min-width: 250px;
+    margin-left: 210px;
+    margin-top: 10px;
+}
+
+.login_form {
+    color: white;
+    float: right;
+    text-align: left;
+}
+
+.login_form input {
+    margin: 5px 0;
+}
+
+.width80 { width: 79%}
+.width100 { width: 100%}
+.width20 { width: 19%}
+.height100 { height: 100%}
