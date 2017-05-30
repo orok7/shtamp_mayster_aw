@@ -1,0 +1,25 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<style>
+    <%@include file="../css/menu.css" %>
+</style>
+<menu class="menubg mrg-btm mrg-rgh fleft">
+    <ul>
+        <li><a href="#">Печатки</a>
+            <ul>
+                <li><a href="#">ФОП</a></li>
+                <li><a href="#">Юридичним</a></li>
+                <li><a href="#">Лікарям</a></li>
+                <li><a href="#">Адвокатам</a></li>
+                <li><a href="#">Експертам</a></li>
+                <li><a href="#">Інші</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Штампи</a></li>
+        <li><a href="#">Факсиміле</a></li>
+        <li><a href="#">Ex Libris</a></li>
+        <li><a href="#">Пломбіратори</a></li>
+        <li><a href="#">Візитки</a></li>
+        <li><a href="#">Контакти</a></li>
+    </ul>
+</menu>

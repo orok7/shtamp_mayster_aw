@@ -13,8 +13,8 @@
 </head>
 <body class="bodybg">
     <%@include file="mp/header.jsp" %>
-    <%@include file="mp/menu.html" %>
+    <%@include file="mp/menu.jsp" %>
     <%@include file="mp/content.html" %>
-    <%@include file="mp/footer.html" %>
+    <%@include file="mp/footer.jsp" %>
 </body>
 </html>

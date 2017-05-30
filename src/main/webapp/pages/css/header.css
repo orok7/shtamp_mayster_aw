@@ -5,7 +5,7 @@ header {
     /*margin-top: 30px;*/
     padding: 3px;
     text-align: right;
-    min-width: 1023px
+    min-width: 1300px
 }
 
 header table {
@@ -57,6 +57,7 @@ header td{
     color: white;
     float: right;
     text-align: left;
+    margin-right: 20px;
 }
 
 .login_form input {

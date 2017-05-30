@@ -21,60 +21,10 @@ p {
     text-align: center;
 }
 
-menu {
-    width: 250px;
-    height: 500px;
-    padding: 0;
-    margin-top: 0;
-    border-right: 1px solid #0064be
-}
-
-.nav{
-    margin: 0;
-    margin-left: 10px;
-    padding: 0
-}
-
-.nav li{
-    list-style: none
-}
-
-.nav a{
-    display: block;
-    width: 93%;
-    min-width: 150px;
-    color: #0064be;
-    text-decoration: none;
-    text-align: left;
-    border-left: 5px solid #0064be;
-    border-bottom: 1px solid grey;
-    padding: 7px 0 7px 10px;
-    margin-bottom: 10px;
-    transition: 0.5s
-}
-
-.nav a:hover{
-    color: white;
-    background: #0064be;
-    /*border-left: 5px solid white;*/
-    border-bottom: 1px solid #0064be;
-}
-
 .content {
     width: calc(100% - 287px);
     height: auto;
     min-height: 480px;
     min-width: 300px;
     padding: 10px
-}
-
-footer {
-    width: calc(100% - 6px);
-    height: 150px;
-    margin: 0;
-    padding: 3px;
-    min-width: 573px;
-    /*border-top: 2px solid white;*/
-    /*rgb(0,50,100);*/
-    clear: both
 }
