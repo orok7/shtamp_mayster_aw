@@ -20,11 +20,3 @@ body { padding: 0;  margin: 0}
 p {
     text-align: center;
 }
-
-.content {
-    width: calc(100% - 287px);
-    height: auto;
-    min-height: 480px;
-    min-width: 300px;
-    padding: 10px
-}

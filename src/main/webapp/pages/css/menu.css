@@ -2,8 +2,7 @@ menu {
     width: 250px;
     height: 500px;
     padding: 0;
-    margin-top: 0;
-    border-right: 1px solid #0064be
+    margin-top: 0
 }
 
 ul {
@@ -25,8 +24,8 @@ li a{
     text-align: left;
     border-left: 5px solid #0064be;
     border-bottom: 1px solid grey;
-    padding: 7px 0 7px 10px;
-    margin-bottom: 10px;
+    padding: 3px 0 3px 10px;
+    margin-bottom: 5px;
     transition: 0.5s
 }
 

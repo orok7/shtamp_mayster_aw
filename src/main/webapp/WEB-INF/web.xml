@@ -16,6 +16,10 @@
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
         <url-pattern></url-pattern>
+        <url-pattern>/nextPage</url-pattern>
+        <url-pattern>/prevPage</url-pattern>
+        <url-pattern>/toFirstPage</url-pattern>
+        <url-pattern>/toLastPage</url-pattern>
     </servlet-mapping>
 
 </web-app>

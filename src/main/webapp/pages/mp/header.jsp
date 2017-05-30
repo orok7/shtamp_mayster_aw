@@ -30,6 +30,9 @@
             <input class="width20 height100" type="submit" value="Пошук">
         </form>
     </div>
+    <div class="cart">
+        <a href="" style="display: block; width: 100%; height: 100%" title="Корзина"></a>
+    </div>
     <form class="login_form" action="/login" title="Login">
         Логін або e-mail:<br>
         <input class="width100" type="email" name="loginName">

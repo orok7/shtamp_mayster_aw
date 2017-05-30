@@ -1,0 +1,12 @@
+.block {
+    width: 200px;
+    height: 250px;
+    margin: 20px;
+    float: left;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.block:hover {
+    box-shadow: 2px 2px 15px black;
+}
