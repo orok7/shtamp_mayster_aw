@@ -32,12 +32,13 @@ header td{
     border-radius: 50%;
     background: #0064be url("/pages/img/logo_small_white.png") round;
     border: solid 5px #0064be;
-    transition: 1s
+    transition: 0.5s
 }
 
 .logo:hover {
-    background: #f0f0be url("/pages/img/logo_small.png") round;
-    border: solid 5px #f0f0be;
+    /*background: #f0f0be url("/pages/img/logo_small.png") round;*/
+    /*border: solid 5px #f0f0be;*/
+    border: solid 5px #0084be;
 }
 
 .search_form {

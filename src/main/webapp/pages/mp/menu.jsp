@@ -20,6 +20,7 @@
         <li><a href="#">Ex Libris</a></li>
         <li><a href="#">Пломбіратори</a></li>
         <li><a href="#">Візитки</a></li>
+        <li><a href="#">Документи для отримання</a></li>
         <li><a href="#">Контакти</a></li>
     </ul>
 </menu>
