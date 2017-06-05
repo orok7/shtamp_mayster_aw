@@ -1,0 +1,52 @@
+INSERT INTO city (name)
+    VALUES
+      ("Львів"),
+      ("Винники"),
+      ("Тернопіль"),
+      ("Київ"),
+      ("Рахів"),
+      ("Вінниця"),
+      ("Одеса"),
+      ("Харків");
+
+INSERT INTO address (building, room, street, city_id)
+VALUES
+  (5, 1, "Словацького", 1),
+  (15, 1, "Данилишана", 1),
+  (12, 1, "Галицька", 2),
+  (25, 2, "Центральна", 3),
+  (17, 2, "Хрещатик", 4),
+  (98, 2, "Бальзака", 4),
+  (1, 2, "Свободи", 5),
+  (11, 2, "Рошенівська", 6),
+  (31, 2, "Арбат", 7),
+  (41, 2, "Миру", 8);
+
+INSERT INTO carrier (name)
+    VALUES
+      ("Нова пошта");
+
+INSERT INTO carrierdepartment (name, address_id, carrier_id)
+VALUES
+  ("Відділення №14", 1, 1),
+  ("Відділення №5", 2, 1),
+  ("Відділення №1", 3, 1),
+  ("Відділення №4", 4, 1),
+  ("Відділення №1", 5, 1),
+  ("Відділення №2", 6, 1),
+  ("Відділення №3", 7, 1),
+  ("Відділення №1", 8, 1),
+  ("Відділення №1", 9, 1),
+  ("Відділення №1", 10, 1);
+
+SELECT
+  carrier.name,
+  carrierdepartment.name,
+  city.name,
+  address.street,
+  address.building,
+  address.room
+FROM carrier
+JOIN carrierdepartment ON carrier.id = carrierdepartment.carrier_id
+JOIN address ON carrierdepartment.address_id = address.id
+JOIN city ON address.city_id = city.id;

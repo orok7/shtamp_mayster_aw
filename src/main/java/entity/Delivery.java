@@ -14,12 +14,12 @@ public class Delivery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Carrier carrier;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private CarrierDepartment carrierDepartment;
     private boolean isTargetedDelivery;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Address targetAddress;
     private String declarationNumber;
 }

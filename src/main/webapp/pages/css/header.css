@@ -53,8 +53,9 @@ header td{
     width: 70px;
     height: 70px;
     margin-top: 12px;
+    margin-left: 5px;
     background: #0064be url("/pages/img/cart_white.png") round;
-    transition: 0.5s;
+    transition: 0.25s;
     float: left;
 }
 
@@ -63,14 +64,21 @@ header td{
 }
 
 .login_form {
+    width: 220px;
     color: white;
     float: right;
     text-align: left;
     margin-right: 20px;
 }
 
+.login_form a {
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
 .login_form input {
-    margin: 5px 0;
+    margin: 1px 0;
 }
 
 .width80 { width: 79%}

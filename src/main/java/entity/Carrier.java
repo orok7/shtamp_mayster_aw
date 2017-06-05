@@ -3,6 +3,8 @@ package entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,6 +17,6 @@ public class Carrier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToOne
-    private CarrierDepartment department;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<CarrierDepartment> departments = new ArrayList<>();
 }

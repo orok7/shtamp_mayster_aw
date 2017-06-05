@@ -14,11 +14,11 @@ public class Characteristic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Property property;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private PropertyValue propertyValue;
 
 }

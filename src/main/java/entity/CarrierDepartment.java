@@ -14,9 +14,9 @@ public class CarrierDepartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Carrier carrier;
     private String name;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Address address;
 }

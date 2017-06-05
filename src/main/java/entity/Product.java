@@ -16,17 +16,17 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    private Group group;
+    @OneToOne(fetch = FetchType.LAZY)
+    private ProductGroup productGroup;
     private String article;
     private String name;
     private boolean hasCharacteristic;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Characteristic> characteristics = new ArrayList<>();
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private MeasurementUnits measurementUnits;
     private double price;
     private String description;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Image> images = new ArrayList<>();
 }

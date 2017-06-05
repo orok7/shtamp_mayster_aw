@@ -21,8 +21,16 @@ public class User {
     private String password;
     private String tempPassword;
     private int discount;
-    @OneToMany
+    private boolean isCompany;
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Contacts> contacts = new ArrayList<>();
     private String note;
     private Timestamp dateOfRegistration;
+    private Timestamp createTempPassword;
+    @OneToOne(fetch = FetchType.LAZY)
+    private CompanyUser companyDate;
+    @OneToOne(fetch = FetchType.LAZY)
+    private IndividualUser individualDate;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Invoice> invoices = new ArrayList<>();
 }

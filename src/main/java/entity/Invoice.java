@@ -13,22 +13,22 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Order {
+public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User buyer;
     private Date date;
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<ProductToBuy> products = new ArrayList<>();
     private double sum;
     private String note;
-    @OneToOne
-    private OrderStatus status;
+    @OneToOne(fetch = FetchType.LAZY)
+    private InvoiceStatus status;
     private double payed;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private PaymentType paymentType;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Delivery delivery;
 }

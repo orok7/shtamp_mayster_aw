@@ -2,10 +2,7 @@ package entity;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -13,10 +10,10 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class IndividualUser extends User {
+public class IndividualUser{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String surename;
+    private String surname;
 }

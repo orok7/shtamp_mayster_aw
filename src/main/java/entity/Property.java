@@ -1,5 +1,6 @@
 package entity;
 
+
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -19,3 +20,4 @@ public class Property {
     private int id;
     private String name;
 }
+
