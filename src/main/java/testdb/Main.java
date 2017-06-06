@@ -30,6 +30,8 @@ public class Main {
                 .addAnnotatedClass(ProductToBuy.class)
                 .addAnnotatedClass(Property.class)
                 .addAnnotatedClass(PropertyValue.class)
+                .addAnnotatedClass(Rating.class)
+                .addAnnotatedClass(Reviews.class)
                 .addAnnotatedClass(User.class)
                 .buildSessionFactory();
 

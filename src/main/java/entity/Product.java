@@ -29,4 +29,8 @@ public class Product {
     private String description;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Image> images = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Rating> ratings = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Reviews> reviews = new ArrayList<>();
 }

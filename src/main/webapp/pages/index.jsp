@@ -9,5 +9,6 @@
     <%@include file="mp/menu.jsp" %>
     <%@include file="mp/content.jsp" %>
     <%@include file="mp/footer.jsp" %>
+    <%@include file="mb/registration_mb.jsp" %>
 </body>
 </html>

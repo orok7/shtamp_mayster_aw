@@ -40,6 +40,6 @@
         <input class="width80" type="password" name="pass">
         <input class="width20" type="submit" value="Вхід">
         <a href="/passRecovery" style="float: left" title="Відновити пароль">Забули пароль?</a>
-        <a href="/registration" style="float: right" title="Зареєструвати акаунт">Зареєструватися</a>
+        <a href="#" id="registration" style="float: right" title="Зареєструвати акаунт">Зареєструватися</a>
     </form>
 </header>
