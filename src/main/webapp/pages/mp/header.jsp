@@ -26,7 +26,7 @@
             </tr>
         </table>
         <form class="search_form" action="/search" title="Пошук">
-            <input class="width80 height100" type="search" name="searchThis">
+            <input class="width80 height100" type="search" name="searchThis" placeholder="Пошук...">
             <input class="width20 height100" type="submit" value="Пошук">
         </form>
     </div>
@@ -35,9 +35,9 @@
     </div>
     <form class="login_form" action="/login" title="Увійти в свій акаунт">
         E-mail:<br>
-        <input class="width100" type="email" name="loginName">
+        <input class="width100" type="email" name="loginName" placeholder="email@domain.com">
         <br>Пароль:<br>
-        <input class="width80" type="password" name="pass">
+        <input class="width80" type="password" name="pass" placeholder="password">
         <input class="width20" type="submit" value="Вхід">
         <a href="/passRecovery" style="float: left" title="Відновити пароль">Забули пароль?</a>
         <a href="#" id="registration" style="float: right" title="Зареєструвати акаунт">Зареєструватися</a>

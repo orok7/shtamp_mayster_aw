@@ -2,7 +2,7 @@ header {
     width: calc(100% - 6px);
     height: 100px;
     margin: 50px 0 50px;
-    padding: 3px;
+    padding: 7px 3px;
     text-align: right;
     min-width: 1300px
 }
