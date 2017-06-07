@@ -4,25 +4,9 @@ import entity.*;
 import exceptions.SMDBException;
 import interfaces.Command;
 import org.hibernate.*;
-import org.hibernate.Cache;
-import org.hibernate.boot.spi.SessionFactoryOptions;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.engine.spi.FilterDefinition;
-import org.hibernate.metadata.ClassMetadata;
-import org.hibernate.metadata.CollectionMetadata;
-import org.hibernate.stat.Statistics;
-
-import javax.naming.NamingException;
-import javax.naming.Reference;
-import javax.persistence.*;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Connection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class AccountCreateNew implements Command {
 
