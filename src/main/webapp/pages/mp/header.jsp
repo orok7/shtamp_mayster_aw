@@ -33,13 +33,13 @@
     <div class="cart">
         <a href="" style="display: block; width: 100%; height: 100%" title="Корзина"></a>
     </div>
-    <form class="login_form" action="/login" title="Увійти в свій акаунт">
+    <form class="login_form" action="/login" title="Увійти в свій акаунт" method="post">
         E-mail:<br>
         <input class="width100" type="email" name="loginName" placeholder="email@domain.com">
         <br>Пароль:<br>
         <input class="width80" type="password" name="pass" placeholder="password">
         <input class="width20" type="submit" value="Вхід">
-        <a href="/passRecovery" style="float: left" title="Відновити пароль">Забули пароль?</a>
+        <a href="#" id="passrecovery" style="float: left" title="Відновити пароль">Забули пароль?</a>
         <a href="#" id="registration" style="float: right" title="Зареєструвати акаунт">Зареєструватися</a>
     </form>
 </header>

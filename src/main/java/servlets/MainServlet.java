@@ -1,5 +1,9 @@
 package servlets;
 
+import commands.AccountCreateNew;
+import exceptions.SMDBException;
+import interfaces.Command;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +15,7 @@ import java.util.List;
 
 @WebServlet(name = "MainServlet")
 public class MainServlet extends HttpServlet {
-    int pageNum = 3;
+    int pageNum = 1;
     int inPage = 8;
     int elemNum = 100;
     List<String> list = new ArrayList<String>();
@@ -25,15 +29,34 @@ public class MainServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Post");
+
+        makeContent(request);
+        Command cmd = new AccountCreateNew();
+        try {
+            cmd.execute(request,response);
+        } catch (SMDBException e) {
+            e.printStackTrace();
+        }
+
+        request
+                .getRequestDispatcher("pages/index.jsp")
+                .forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println(request.getRequestURI());
 
+        makeContent(request);
+
+        request
+                .getRequestDispatcher("pages/index.jsp")
+                .forward(request, response);
+    }
+
+    void makeContent(HttpServletRequest request){
         request.setAttribute("title", "Index page");
         request.setAttribute("contentTitle", "Печатки для ФОП");
-
         switch (request.getRequestURI()){
             case "/toFirstPage":
                 if (pageNum > 1) pageNum = 1;
@@ -60,8 +83,5 @@ public class MainServlet extends HttpServlet {
                 (inPage*(pageNum-1)+inPage) > list.size()
                         ?list.size():(inPage*(pageNum-1)+inPage));
         request.setAttribute("list", listOut );
-        request
-                .getRequestDispatcher("pages/index.jsp")
-                .forward(request, response);
     }
 }

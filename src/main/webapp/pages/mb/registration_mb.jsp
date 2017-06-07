@@ -1,51 +1,46 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <style>
-    <%@include file="../css/modal_main.css" %>
     <%@include file="../css/modal_registration.css" %>
 </style>
 
-<div id="registration_mb" class="modal">
+<div id="registration_mb" class="modal" style="display: ${regModDisplay}">
 
     <div class="modal-content">
         <div class="modal-header">
-            <span class="close">&times;</span>
+            <span class="close" id="closeR">&times;</span>
             <h2>Реєстрація</h2>
         </div>
         <div class="modal-body">
             <form action="/registration" method="post">
-                <br><input type="checkbox" id="isCompany">
+                <br><input type="checkbox" name="isCompany" id="isCompany">
                 Аккаунт для юридичної особи<br><br>
                 <div id="individualData">
                     <input type="text" name="userName" placeholder="Петро">
                     &nbsp;&nbsp;&nbsp;Ім'я<br><br>
                     <input type="text" name="userSurname" placeholder="Петрів">
                     &nbsp;&nbsp;&nbsp;Прізвище<br><br>
-                    <input type="email" name="userEmail" placeholder="petro@domain.com">
-                    &nbsp;&nbsp;&nbsp;E-mail<br><br>
-                    <input type="password" name="userPassword" placeholder="password">
-                    &nbsp;&nbsp;&nbsp;Пароль<br><br>
-                    <input type="password" name="userPassAgain" placeholder="password">
-                    &nbsp;&nbsp;&nbsp;Підтвердіть пароль
                 </div>
                 <div id="companyData">
                     <input type="text" name="userForm" placeholder="Приватне підприємство">
                     &nbsp;&nbsp;&nbsp;Форма власності<br><br>
-                    <input type="text" name="userFullName" placeholder="Якась назва">
+                    <input type="text" name="userFullName" placeholder="Ваша назва">
                     &nbsp;&nbsp;&nbsp;Назва<br><br>
-                    <input type="text" name="userShortName" placeholder="ПП ЯкНаз">
+                    <input type="text" name="userShortName" placeholder="ПП ВашаНаз">
                     &nbsp;&nbsp;&nbsp;Скорочена назва<br><br>
+                    <input type="text" name="userCode" placeholder="ПП ВашаНаз">
+                    &nbsp;&nbsp;&nbsp;Код ЄДРПОУ<br><br>
                     <input type="text" name="userContactName" placeholder="Петро">
                     &nbsp;&nbsp;&nbsp;Ім'я контактної особи<br><br>
                     <input type="text" name="userContactSurname" placeholder="Петрів">
                     &nbsp;&nbsp;&nbsp;Прізвище контактної особи<br><br>
-                    <input type="email" name="userEmail" placeholder="petro@domain.com">
-                    &nbsp;&nbsp;&nbsp;E-mail<br><br>
-                    <input type="password" name="userPassword" placeholder="password">
-                    &nbsp;&nbsp;&nbsp;Пароль<br><br>
-                    <input type="password" name="userPassAgain" placeholder="password">
-                    &nbsp;&nbsp;&nbsp;Підтвердіть пароль
-                </div><br>
+                </div>
+                <input type="email" name="userEmail" placeholder="petro@domain.com">
+                &nbsp;&nbsp;&nbsp;E-mail<br><br>
+                <input type="password" name="userPassword" placeholder="password">
+                &nbsp;&nbsp;&nbsp;Пароль<br><br>
+                <input type="password" name="userPassAgain" placeholder="password">
+                &nbsp;&nbsp;&nbsp;Підтвердіть пароль<br>
                 <br><input type="checkbox" id="isAccepted">
                 Я приймаю <a href="#">умови</a> реєстрації<br><br>
                 <input type="submit" value="Зареєструвати" disabled id="submitReg">
@@ -56,18 +51,18 @@
 </div>
 
 <script>
-    var modal = document.getElementById('registration_mb');
-    var btn = document.getElementById("registration");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
+    var regBlank = document.getElementById("registration_mb");
+    var btnReg = document.getElementById("registration");
+    var closeR = document.getElementById("closeR");
+    btnReg.onclick = function() {
+        regBlank.style.display = "block";
     }
-    span.onclick = function() {
-        modal.style.display = "none";
+    closeR.onclick = function() {
+        regBlank.style.display = "none";
     }
     window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
+        if (event.target == regBlank) {
+            regBlank.style.display = "none";
         }
     }
 </script>

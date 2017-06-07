@@ -1,3 +1,4 @@
+<!--suppress CheckTagEmptyBody -->
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
@@ -15,11 +16,16 @@
 
     <servlet-mapping>
         <servlet-name>MainServlet</servlet-name>
+<!-- Get methods -->
         <url-pattern></url-pattern>
         <url-pattern>/nextPage</url-pattern>
         <url-pattern>/prevPage</url-pattern>
         <url-pattern>/toFirstPage</url-pattern>
         <url-pattern>/toLastPage</url-pattern>
+<!-- Post methods -->
+        <url-pattern>/registration</url-pattern>
+        <url-pattern>/passRecovery</url-pattern>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
 </web-app>

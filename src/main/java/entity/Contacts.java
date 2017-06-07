@@ -23,4 +23,9 @@ public class Contacts {
     private CarrierDepartment carrierDepartment;
     @OneToOne(fetch = FetchType.LAZY)
     private Address homeAddress;
+
+    public Contacts (String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
 }

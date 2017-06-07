@@ -1,6 +1,8 @@
 package entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -25,7 +27,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Contacts> contacts = new ArrayList<>();
     private String note;
+    @CreationTimestamp
     private Timestamp dateOfRegistration;
+    @UpdateTimestamp
     private Timestamp createTempPassword;
     @OneToOne(fetch = FetchType.LAZY)
     private CompanyUser companyDate;
@@ -33,4 +37,15 @@ public class User {
     private IndividualUser individualDate;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Invoice> invoices = new ArrayList<>();
+
+    public User (String email, String password, boolean isCompany,
+                 CompanyUser companyUser, IndividualUser individualUser,
+                 Contacts contacts){
+        login = email;
+        this.password = password;
+        this.isCompany = isCompany;
+        companyDate = companyUser;
+        individualDate = individualUser;
+        this.contacts.add(contacts);
+    };
 }
