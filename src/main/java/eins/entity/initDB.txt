@@ -50,3 +50,29 @@ FROM carrier
 JOIN carrierdepartment ON carrier.id = carrierdepartment.carrier_id
 JOIN address ON carrierdepartment.address_id = address.id
 JOIN city ON address.city_id = city.id;
+
+SELECT
+  dateOfRegistration,
+  login,
+  password,
+  shortName,
+  code,
+  name,
+  surname
+FROM user
+JOIN companyuser ON user.companyDate_id = companyuser.id
+JOIN user_contacts ON user.id = user_contacts.User_id
+JOIN contacts ON user_contacts.contacts_id = contacts.id;
+
+SELECT
+  dateOfRegistration,
+  login,
+  password,
+  individualuser.name,
+  individualuser.surname,
+  contacts.name,
+  contacts.surname
+FROM user
+  JOIN individualuser ON user.individualDate_id = individualuser.id
+  JOIN user_contacts ON user.id = user_contacts.User_id
+  JOIN contacts ON user_contacts.contacts_id = contacts.id;

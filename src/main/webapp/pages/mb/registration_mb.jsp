@@ -16,26 +16,26 @@
                 <br><input type="checkbox" name="isCompany" id="isCompany">
                 Аккаунт для юридичної особи<br><br>
                 <div id="individualData">
-                    <input type="text" name="userName" placeholder="Петро">
+                    <input type="text" name="userName" placeholder="Петро" value="${userName}">
                     &nbsp;&nbsp;&nbsp;Ім'я<br><br>
-                    <input type="text" name="userSurname" placeholder="Петрів">
+                    <input type="text" name="userSurname" placeholder="Петрів" value="${userSurname}">
                     &nbsp;&nbsp;&nbsp;Прізвище<br><br>
                 </div>
                 <div id="companyData">
-                    <input type="text" name="userForm" placeholder="Приватне підприємство">
+                    <input type="text" name="userForm" placeholder="Приватне підприємство" value="${userForm}">
                     &nbsp;&nbsp;&nbsp;Форма власності<br><br>
-                    <input type="text" name="userFullName" placeholder="Ваша назва">
+                    <input type="text" name="userFullName" placeholder="Ваша назва" value="${userFullName}">
                     &nbsp;&nbsp;&nbsp;Назва<br><br>
-                    <input type="text" name="userShortName" placeholder="ПП ВашаНаз">
+                    <input type="text" name="userShortName" placeholder="ПП ВашаНаз" value="${userShortName}">
                     &nbsp;&nbsp;&nbsp;Скорочена назва<br><br>
-                    <input type="text" name="userCode" placeholder="ПП ВашаНаз">
+                    <input type="text" name="userCode" placeholder="01234567" value="${userCode}">
                     &nbsp;&nbsp;&nbsp;Код ЄДРПОУ<br><br>
-                    <input type="text" name="userContactName" placeholder="Петро">
+                    <input type="text" name="userContactName" placeholder="Петро" value="${userContactName}">
                     &nbsp;&nbsp;&nbsp;Ім'я контактної особи<br><br>
-                    <input type="text" name="userContactSurname" placeholder="Петрів">
+                    <input type="text" name="userContactSurname" placeholder="Петрів" value="${userContactSurname}">
                     &nbsp;&nbsp;&nbsp;Прізвище контактної особи<br><br>
                 </div>
-                <input type="email" name="userEmail" placeholder="petro@domain.com">
+                <input type="email" name="userEmail" placeholder="petro@domain.com" value="${userEmail}">
                 &nbsp;&nbsp;&nbsp;E-mail<br><br>
                 <input type="password" name="userPassword" placeholder="password">
                 &nbsp;&nbsp;&nbsp;Пароль<br><br>
@@ -44,6 +44,7 @@
                 <br><input type="checkbox" id="isAccepted">
                 Я приймаю <a href="#">умови</a> реєстрації<br><br>
                 <input type="submit" value="Зареєструвати" disabled id="submitReg">
+                <span style="color: red">${msgWWR}</span>
             </form>
         </div>
     </div>

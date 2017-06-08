@@ -1,6 +1,5 @@
 //package eins.commands;
 //
-//import eins.dao.impl.IndividualUserDAOImpl;
 //import eins.dao.interfaces.CompanyUserDAO;
 //import eins.dao.interfaces.ContactsDAO;
 //import eins.dao.interfaces.IndividualUserDAO;
@@ -15,17 +14,17 @@
 //public class AccountCreateNew implements Command {
 //
 //    @Autowired
-//    @Qualifier
-//    IndividualUserDAOImpl individualUserDAO;
+//    @Qualifier("iuDAO1")
+//    private IndividualUserDAO iuDAO;
 //    @Autowired
-//    @Qualifier
-//    CompanyUserDAO companyUserDAO;
+//    @Qualifier("cuDAO1")
+//    private CompanyUserDAO cuDAO;
 //    @Autowired
-//    @Qualifier
-//    UserDAO userDAO;
+//    @Qualifier("cDAO1")
+//    private ContactsDAO cDAO;
 //    @Autowired
-//    @Qualifier
-//    ContactsDAO contactsDAO;
+//    @Qualifier("uDAO1")
+//    private UserDAO uDAO;
 //
 //    @Override
 //    public void execute(HttpServletRequest request) throws SMDBException {
@@ -47,38 +46,32 @@
 //                userName + " " +
 //                userSurname
 //        );
-//        boolean isCompany = (isCompanyStr == null)?false:true;
-//        System.out.println(1);
 //
+//        boolean isCompany = (isCompanyStr == null)?false:true;
 //        User user;
+//
 //        if (isCompany) {
-//            System.out.println(2);
 //            CompanyUser cu = new CompanyUser(0,userForm,userFullName,userShortName,userCode);
-//            System.out.println(3);
 //            Contacts contacts = new Contacts(userContactName,userContactSurname);
-//            System.out.println(4);
 //            user = new User(userEmail,userPassword,isCompany,cu,null, contacts);
-//            System.out.println(5);
-//            companyUserDAO.save(cu);
-//            System.out.println(6);
-//            contactsDAO.save(contacts);
-//            System.out.println(7);
-//            userDAO.save(user);
+//            try {
+//                cuDAO.save(cu);
+//                cDAO.save(contacts);
+//                uDAO.save(user);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 //        } else {
-//            System.out.println(8);
-//            IndividualUser iu = new IndividualUser(0,userName,userSurname);
-//            System.out.println(iu);
-//            System.out.println(9);
-//            Contacts contacts = new Contacts(userName,userSurname);
-//            System.out.println(contacts);
-//            System.out.println(10);
-//            user = new User(userEmail,userPassword,isCompany,null,iu, contacts);
-//            System.out.println(11);
-//            individualUserDAO.save(iu);
-//            System.out.println(12);
-//            contactsDAO.save(contacts);
-//            System.out.println(13);
-//            userDAO.save(user);
+//            IndividualUser iu = new IndividualUser(0, userName, userSurname);
+//            Contacts contacts = new Contacts(userName, userSurname);
+//            user = new User(userEmail, userPassword, isCompany, null, iu, contacts);
+//            try {
+//                iuDAO.save(iu);
+//                cDAO.save(contacts);
+//                uDAO.save(user);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
 //        }
 //    }
 //}

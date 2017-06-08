@@ -33,7 +33,7 @@
     <div class="cart">
         <a href="" style="display: block; width: 100%; height: 100%" title="Корзина"></a>
     </div>
-    <form class="login_form" action="/login" title="Увійти в свій акаунт" method="post">
+    <form class="login_form" action="/login" title="Увійти в свій акаунт" method="post" style="display: ${loginDisplay}">
         E-mail:<br>
         <input class="width100" type="email" name="loginName" placeholder="email@domain.com">
         <br>Пароль:<br>
@@ -42,4 +42,19 @@
         <a href="#" id="passrecovery" style="float: left" title="Відновити пароль">Забули пароль?</a>
         <a href="#" id="registration" style="float: right" title="Зареєструвати акаунт">Зареєструватися</a>
     </form>
+    <div class="logged_div" style="display:
+        <c:choose>
+            <c:when test="${not empty loggedDisplay}">
+                ${loggedDisplay}
+            </c:when>
+            <c:otherwise>
+                none
+            </c:otherwise>
+        </c:choose>">
+        Welcome ${luName}
+        <br><br>
+        <form action="/logout" method="post">
+            <input type="submit" value="Вихід">
+        </form>
+    </div>
 </header>

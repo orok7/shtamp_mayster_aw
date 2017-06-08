@@ -31,9 +31,9 @@ public class User {
     private Timestamp dateOfRegistration;
     @UpdateTimestamp
     private Timestamp createTempPassword;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private CompanyUser companyDate;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private IndividualUser individualDate;
     @OneToMany(fetch = FetchType.LAZY)
     private List<Invoice> invoices = new ArrayList<>();

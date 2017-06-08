@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+@Repository("iuDAO1")
 @Transactional
 public class IndividualUserDAOImpl implements IndividualUserDAO {
 
@@ -33,6 +33,6 @@ public class IndividualUserDAOImpl implements IndividualUserDAO {
 
     @Override
     public List<IndividualUser> findAll() {
-        return manager.createQuery("from IndividualUser u", IndividualUser.class).getResultList();
+        return manager.createQuery("from IndividualUser", IndividualUser.class).getResultList();
     }
 }

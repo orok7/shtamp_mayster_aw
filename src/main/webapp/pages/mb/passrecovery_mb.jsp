@@ -4,7 +4,7 @@
     <%@include file="../css/modal_recovery.css" %>
 </style>
 
-<div id="passrecovery_mb" class="modal">
+<div id="passrecovery_mb" class="modal" style="display: ${passRecModDisplay}">
     <div class="modal-content">
         <div class="modal-header">
             <span class="close" id="closePR">&times;</span>
@@ -13,8 +13,9 @@
         <div class="modal-body">
             <form action="/passRecovery" method="post">
                 <br>&nbsp;Ваш E-mail<br><br>
-                <input type="email" name="userEmail" placeholder="petro@domain.com"><br><br>
+                <input type="email" name="userEmailForRecovery" placeholder="petro@domain.com"><br><br>
                 <input type="submit" value="Надіслати тимчасовий пароль">
+                <span style="color: red">${msgWWPR}</span>
             </form>
         </div>
     </div>

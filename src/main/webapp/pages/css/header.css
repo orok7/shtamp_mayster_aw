@@ -81,6 +81,14 @@ header td{
     margin: 1px 0;
 }
 
+.logged_div {
+    width: 220px;
+    color: white;
+    float: right;
+    text-align: left;
+    margin-right: 20px;
+}
+
 .width80 { width: 79%}
 .width100 { width: 100%}
 .width20 { width: 19%}

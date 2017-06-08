@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+@Repository("cuDAO1")
 @Transactional
 public class CompanyUserDAOImpl implements CompanyUserDAO {
 
