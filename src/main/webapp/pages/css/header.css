@@ -1,7 +1,7 @@
 header {
     width: calc(100% - 6px);
     height: 100px;
-    margin: 50px 0 50px;
+    margin: 50px 0 7px;
     padding: 7px 3px;
     text-align: right;
     min-width: 1300px
@@ -69,6 +69,7 @@ header td{
     float: right;
     text-align: left;
     margin-right: 20px;
+    margin-bottom: 0
 }
 
 .login_form a {

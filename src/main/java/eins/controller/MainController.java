@@ -1,58 +1,51 @@
 package eins.controller;
 
-import eins.dao.interfaces.CompanyUserDAO;
-import eins.dao.interfaces.ContactsDAO;
-import eins.dao.interfaces.IndividualUserDAO;
-import eins.dao.interfaces.UserDAO;
-import eins.entity.CompanyUser;
-import eins.entity.Contacts;
-import eins.entity.IndividualUser;
+import eins.dao.CompanyUserDAO;
+import eins.dao.ContactsDAO;
+import eins.dao.IndividualUserDAO;
+import eins.dao.UserDAO;
 import eins.entity.User;
+import eins.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Controller
 public class MainController {
-
     @Autowired
-    @Qualifier("iuDAO1")
-    private IndividualUserDAO iuDAO;
-    @Autowired
-    @Qualifier("cuDAO1")
-    private CompanyUserDAO cuDAO;
-    @Autowired
-    @Qualifier("cDAO1")
-    private ContactsDAO cDAO;
-    @Autowired
-    @Qualifier("uDAO1")
-    private UserDAO uDAO;
+    private UserService uService;
 
     int pageNum = 1;
-    int inPage = 8;
+    int inPage = 10;
     int elemNum = 100;
     List<String> list;
+
+    final double TEMP_PASS_TIME_VALID = 5.0;
 
     @GetMapping({"/","/nextPage","/prevPage","/toFirstPage","/toLastPage"})
     public String index(@CookieValue(value = "loggedUserId", defaultValue = "-1")
             int loggedUserId,
             Model model, HttpServletRequest r) {
-        System.out.println("index.jsp");
+
         if (loggedUserId != -1) {
             model.addAttribute("loggedDisplay", "block");
             model.addAttribute("loginDisplay", "none");
-            User user = uDAO.findById(loggedUserId);
+            User user = uService.findOne(loggedUserId);
             if (!user.isCompany())
                 model.addAttribute("luName", "mr. " + user.getIndividualDate().getName() +
                         " " + user.getIndividualDate().getSurname());
@@ -62,80 +55,100 @@ public class MainController {
             model.addAttribute("loginDisplay", "block");
             System.out.println("Nobody logged");
         }
+
         makeContent(model, r.getRequestURI());
         return "index";
     }
 
-    @PostMapping("/registration")
-    public String saveUser(@RequestParam(value = "isCompany", required = false) String isCompanyStr,
-                           @RequestParam("userEmail") String userEmail,
-                           @RequestParam("userPassword") String userPassword,
-                           @RequestParam("userPassAgain") String userPassAgain,
-                           @RequestParam("userName") String userName,
-                           @RequestParam("userSurname") String userSurname,
-                           @RequestParam("userForm") String userForm,
-                           @RequestParam("userFullName") String userFullName,
-                           @RequestParam("userShortName") String userShortName,
-                           @RequestParam("userCode") String userCode,
-                           @RequestParam("userContactName") String userContactName,
-                           @RequestParam("userContactSurname") String userContactSurname,
-                           Model model, HttpServletRequest r){
+    @PostMapping("/regCompanyUser")
+    public String regCompanyUser(@RequestParam String userEmail,
+                                 @RequestParam String userPassword,
+                                 @RequestParam String userOwnership,
+                                 @RequestParam String userFullName,
+                                 @RequestParam String userShortName,
+                                 @RequestParam String userCode,
+                                 @RequestParam String userContactName,
+                                 @RequestParam String userContactSurname,
+                                 Model model, HttpServletRequest r) {
 
-        boolean isAnyEmpty = isRDAnyEmpty(r);
-        if (isAnyEmpty || !userPassAgain.equals(userPassword)
-                || uDAO.findByLogin(userEmail) != null) {
-            model.addAttribute("regModDisplay","block");
-            model.addAttribute("userEmail", userEmail);
-            model.addAttribute("userName", userName);
-            model.addAttribute("userSurname", userSurname);
-            model.addAttribute("userForm", userForm);
-            model.addAttribute("userFullName", userFullName);
-            model.addAttribute("userShortName", userShortName);
-            model.addAttribute("userCode", userCode);
-            model.addAttribute("userContactName", userContactName);
-            model.addAttribute("userContactSurname", userContactSurname);
-            if (isAnyEmpty)
-                model.addAttribute("msgWWR", "Необхідно ввести всі дані");
-            else if(!userPassAgain.equals(userPassword))
-                model.addAttribute("msgWWR", "Не вірне підтвердження паролю");
-                else model.addAttribute("msgWWR", "Такий е-mail вже зареєстровано");
-        } else {
-            uDAO.saveCompletely(isCompanyStr, userEmail, userPassword,
-                    userName, userSurname,
-                    userForm, userFullName, userShortName, userCode,
-                    userContactName, userContactSurname);
+        uService.save(userEmail, userPassword, userOwnership,
+                userFullName, userShortName, userCode,
+                userContactName, userContactSurname);
+        makeContent(model, r.getRequestURI());
+        return "index";
+    }
+
+    @PostMapping("/regIndividualUser")
+    public String regIndividualUser(@RequestParam String userEmail,
+                                    @RequestParam String userPassword,
+                                    @RequestParam String userName,
+                                    @RequestParam String userSurname,
+                                    Model model, HttpServletRequest r) {
+
+        uService.save(userEmail, userPassword,
+                userName, userSurname);
+        makeContent(model, r.getRequestURI());
+        return "index";
+    }
+    
+    @GetMapping("/findSameEmail")
+    public @ResponseBody String findSameEmail(@RequestParam String userEmail, HttpServletResponse r){
+        User user = uService.findByLogin(userEmail);
+        if (user == null) return "false";
+        return "true";
+    }
+
+    @PostMapping("/passRecovery")
+    public String recoveryPassword(@RequestParam String userEmailForRecovery,
+                                   Model model, HttpServletRequest r){
+        User user = uService.findByLogin(userEmailForRecovery);
+
+        if (user != null) {
+            if (!userTempPassIsValid(user,TEMP_PASS_TIME_VALID)) {
+                uService.setTempPassword(user.getId(), generateTempPass());
+                user = uService.findOne(user.getId());
+            }
+            double min = (System.currentTimeMillis() - user.getCreateTempPassword().getTime())/60000;
+            String msg = "Pass: " + user.getTempPassword() + " дійсний ще " + (5.0-min) + " хв.";
+            model.addAttribute("msgPlaceInIndex", msg);
         }
         makeContent(model, r.getRequestURI());
         return "index";
     }
 
-    @PostMapping("/passRecovery")
-    public String recoveryPassword(@RequestParam("userEmailForRecovery") String userEmailForRecovery,
-                                   Model model, HttpServletRequest r){
-        User user = uDAO.findByLogin(userEmailForRecovery);
-        if (user != null) model.addAttribute("msgWWPR",user.getPassword());
-        else model.addAttribute("msgWWPR", "Вказаний e-mail не знайдено");
-        model.addAttribute("passRecModDisplay","block");
-        makeContent(model, r.getRequestURI());
-        return "index";
-    }
-
     @PostMapping("/login")
-    public String logIn(@RequestParam("loginName") String userEmail,
-                        @RequestParam("pass") String userPassword,
+    public String logIn(@RequestParam String loginName,
+                        @RequestParam String pass,
                         Model model, HttpServletRequest r, HttpServletResponse res){
-        User user = uDAO.findByLogin(userEmail);
-        if (user == null || !user.getPassword().equals(userPassword))
-            System.out.println("Wrong login or password");
-        else {
-            res.addCookie(new Cookie("loggedUserId",String.valueOf(user.getId())));
+
+        User user = uService.findByLogin(loginName);
+        String msg = "";
+
+        if (user != null) {
+            if (user.getTempPassword() != null && !userTempPassIsValid(user, TEMP_PASS_TIME_VALID)) {
+                msg += "Temp password cleared since expired validity!   ";
+                user = uService.findOne(user.getId());
+            }
+        }
+
+        if (user == null || !userCheckPass(user, pass)) {
+
+            msg += "Wrong login or password!";
+
+        } else {
+
+            res.addCookie(new Cookie("loggedUserId", String.valueOf(user.getId())));
             model.addAttribute("loggedDisplay", "block");
             model.addAttribute("loginDisplay", "none");
             if (!user.isCompany())
                 model.addAttribute("luName", "mr. " + user.getIndividualDate().getName() +
                         " " + user.getIndividualDate().getSurname());
             else model.addAttribute("luName", "your company " + user.getCompanyDate().getShortName());
+
         }
+
+        System.out.println(msg);
+        model.addAttribute("msgPlaceInIndex", msg);
         makeContent(model,r.getRequestURI());
         return "index";
     }
@@ -149,34 +162,45 @@ public class MainController {
         return "index";
     }
 
-    /** Is any of registration data empty*/
-    private boolean isRDAnyEmpty(HttpServletRequest r){
-        String isCompanyStr = r.getParameter("isCompany");
-        String userEmail = r.getParameter("userEmail");
-        String userPassword = r.getParameter("userPassword");
-        String userPassAgain = r.getParameter("userPassAgain");
-        String userName = r.getParameter("userName");
-        String userSurname = r.getParameter("userSurname");
-        String userForm = r.getParameter("userForm");
-        String userFullName = r.getParameter("userFullName");
-        String userShortName = r.getParameter("userShortName");
-        String userCode = r.getParameter("userCode");
-        String userContactName = r.getParameter("userContactName");
-        String userContactSurname = r.getParameter("userContactSurname");
-        boolean isCompany = (isCompanyStr == null)?false:true;
-        if (isCompany) {
-            if (userEmail.isEmpty() || userPassword.isEmpty() || userPassAgain.isEmpty() ||
-                    userForm.isEmpty() || userFullName.isEmpty() || userShortName.isEmpty() ||
-                    userCode.isEmpty() || userContactName.isEmpty() || userContactSurname.isEmpty()) {
-                return true;
-            }
-        }else {
-            if (userEmail.isEmpty() || userPassword.isEmpty() || userPassAgain.isEmpty() ||
-                    userName.isEmpty()||userSurname.isEmpty()) {
-                return true;
-            }
+    public boolean userTempPassIsValid(User user, double compareThis){
+        if (user == null || user.getTempPassword() == null) {
+            return false;
         }
+        double min = (System.currentTimeMillis() - user.getCreateTempPassword().getTime())/60000;
+        if (min > compareThis) {
+            uService.clearTempPassword(user.getId());
+            return false;
+        }
+        return true;
+    }
+
+    public boolean userCheckPass(User user, String pass){
+
+        if (user == null) return false;
+
+        if (userTempPassIsValid(user,TEMP_PASS_TIME_VALID)
+                && user.getTempPassword().equals(pass)) return true;
+
+        if (user.getPassword().equals(pass)) return true;
+
         return false;
+    }
+
+    private String generateTempPass(){
+        String pass = "";
+        Random r = new Random();
+        List<Supplier<Integer>> funcs = new ArrayList<>();
+        // number char code [48 - 57]
+        funcs.add(() -> {return (r.nextInt(10)+48);});
+        // bigger = 65 - 90
+        funcs.add(() -> {return (r.nextInt(26)+65);});
+        // smaller = 97 - 122
+        funcs.add(() -> {return (r.nextInt(26)+97);});
+        for (int i = 0; i < 6; i++){
+            char ch = (char) (int) funcs.get(r.nextInt(3)).get();
+            pass += ch;
+        }
+        return pass;
     }
 
     private void makeContent(Model model, String uri){

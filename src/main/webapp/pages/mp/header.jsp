@@ -4,7 +4,7 @@
     <%@include file="../css/header.css" %>
 </style>
 <div class="logo">
-    <a href="" style="display: block; width: 100%; height: 100%" title="На головну"></a>
+    <a href="/" style="display: block; width: 100%; height: 100%" title="На головну"></a>
 </div>
 
 <header class="border headerbg">

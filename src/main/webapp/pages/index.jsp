@@ -15,5 +15,10 @@
     <%@include file="mp/footer.jsp" %>
     <%@include file="mb/registration_mb.jsp" %>
     <%@include file="mb/passrecovery_mb.jsp" %>
+
+    <script>
+        if ("${msgPlaceInIndex}" !== "")
+            alert("${msgPlaceInIndex}");
+    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <style>
     <%@include file="../css/menu.css" %>
 </style>
-<menu class="menubg mrg-btm mrg-rgh fleft">
+<menu class="menubg fright">
     <ul>
         <li><a href="#">Печатки</a>
             <ul>

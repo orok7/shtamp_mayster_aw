@@ -4,7 +4,7 @@
     <%@include file="../css/content.css" %>
     <%@include file="../css/block.css" %>
 </style>
-<div class="content contentbg mrg-btm fleft border mrg-lft">
+<div class="content contentbg mrg-btm fright border mrg-lft">
     <p class="content-title">${contentTitle}</p>
     <div class="table-div">
         <c:forEach items="${list}" var="elem">

@@ -11,11 +11,11 @@
             <h2>Відновити пароль</h2>
         </div>
         <div class="modal-body">
-            <form action="/passRecovery" method="post">
+            <form id="formPassRec" action="/passRecovery" onsubmit="return passRecValidator(true, false)" method="post">
                 <br>&nbsp;Ваш E-mail<br><br>
                 <input type="email" name="userEmailForRecovery" placeholder="petro@domain.com"><br><br>
                 <input type="submit" value="Надіслати тимчасовий пароль">
-                <span style="color: red">${msgWWPR}</span>
+                <span id="MWWPR" style="color: red"></span>
             </form>
         </div>
     </div>
@@ -36,5 +36,31 @@
         if (event.target == passRecBlank) {
             passRecBlank.style.display = "none";
         }
+    }
+</script>
+
+<script>
+    function passRecValidator(firstRun, resOfFirstRun) {
+        if (firstRun) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.responseText === "false") {
+                        passRecValidator(false, false);
+                    } else passRecValidator(false, true);
+                }
+            };
+            xhr.open("GET", "/findSameEmail?userEmail=" + document.getElementsByName("userEmailForRecovery")[0].value, true);
+            xhr.send(null);
+        } else {
+            if (!resOfFirstRun) {
+                document.getElementById("MWWPR").innerHTML = "Введений емейл не знайдено"
+                return false;
+            } else {
+                document.getElementById("MWWPR").innerHTML = "";
+                document.forms["formPassRec"].submit();
+                return true;
+            }
+        } return false;
     }
 </script>

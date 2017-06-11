@@ -47,5 +47,6 @@ public class User {
         companyDate = companyUser;
         individualDate = individualUser;
         this.contacts.add(contacts);
-    };
+    }
+
 }
