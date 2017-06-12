@@ -30,7 +30,7 @@ header td{
     width: 170px;
     height: 170px;
     border-radius: 50%;
-    background: #0064be url("../img/logo_small_white.png") round;
+    background: #0064be url("/img/logo_small_white.png") round;
     border: solid 5px #0064be;
     transition: 0.5s
 }
@@ -54,7 +54,7 @@ header td{
     height: 70px;
     margin-top: 12px;
     margin-left: 5px;
-    background: #0064be url("/pages/img/cart_white.png") round;
+    background: #0064be url("/img/cart_white.png") round;
     transition: 0.25s;
     float: left;
 }
