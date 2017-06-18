@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<style>
-    <%@include file="../css/modal_registration.css" %>
-</style>
+<link rel="stylesheet" href="/css/modal_registration.css">
 
 <div id="registration_mb" class="modal" style="display: ${regModDisplay}">
 

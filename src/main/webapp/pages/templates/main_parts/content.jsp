@@ -1,10 +1,8 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style>
-    <%@include file="../css/content.css" %>
-    <%@include file="../css/block.css" %>
-</style>
-<div class="content contentbg mrg-btm fright border mrg-lft">
+<link rel="stylesheet" href="/css/content.css">
+<link rel="stylesheet" href="/css/block.css">
+
+<div class="content contentbg mrg-b15 fright border mrg-l10">
     <p class="content-title">${contentTitle}</p>
     <div class="table-div">
         <c:forEach items="${list}" var="elem">

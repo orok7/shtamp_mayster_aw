@@ -22,4 +22,7 @@ public interface UserService {
 
     void clearTempPassword(int userId);
 
+    boolean userCheckPass(User user, String pass);
+
+    boolean userTempPassIsValid(User user);
 }

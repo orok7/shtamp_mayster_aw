@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="/css/menu.css">
 
-<style>
-    <%@include file="../css/menu.css" %>
-</style>
 <menu class="menubg fright">
     <ul>
         <li><a href="#">Печатки</a>

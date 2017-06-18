@@ -1,24 +1,21 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-<html>
-<head>
-    <title>${title}</title>
-    <style>
-        <%@include file="css/mp.css" %>
-        <%@include file="css/modal_main.css" %>
-    </style>
-</head>
-<body class="bodybg">
-    <%@include file="mp/header.jsp" %>
-    <%@include file="mp/menu.jsp" %>
-    <%@include file="mp/content.jsp" %>
-    <%@include file="mp/footer.jsp" %>
-    <%@include file="mb/registration_mb.jsp" %>
-    <%@include file="mb/passrecovery_mb.jsp" %>
+<%@include file="templates/main_parts/head.jsp" %>
 
+    <%@include file="templates/main_parts/header.jsp" %>
+    <%@include file="templates/main_parts/menu.jsp" %>
+    <%@include file="templates/main_parts/content.jsp" %>
+    <%@include file="templates/main_parts/footer.jsp" %>
+    <%@include file="templates/modal_boxes/mb_logining.jsp" %>
+    <%@include file="templates/modal_boxes/mb_logouting.jsp" %>
+
+    <script src="/my_js/my_modal.js"></script>
     <script>
-        if ("${msgPlaceInIndex}" !== "")
-            alert("${msgPlaceInIndex}");
+        my_modal("mb_logining","closeUL");
+        my_modal("mb_logouting","closeULO");
     </script>
+    <%--<script>--%>
+        <%--if ("${msgPlaceInIndex}" !== "")--%>
+            <%--alert("${msgPlaceInIndex}");--%>
+    <%--</script>--%>
+
 </body>
 </html>

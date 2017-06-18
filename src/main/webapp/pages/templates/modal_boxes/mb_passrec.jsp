@@ -1,8 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<style>
-    <%@include file="../css/modal_recovery.css" %>
-</style>
+<link rel="stylesheet" href="/css/modal_recovery.css">
 
 <div id="passrecovery_mb" class="modal" style="display: ${passRecModDisplay}">
     <div class="modal-content">

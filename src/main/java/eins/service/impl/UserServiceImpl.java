@@ -27,6 +27,8 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private ContactsDAO cDAO;
 
+    final static double TEMP_PASS_TIME_VALID = 5.0;
+
     @Override
     public void save(String userEmail, String userPassword,
                      String userName, String userSurname) {
@@ -79,4 +81,33 @@ public class UserServiceImpl implements UserService{
         User user = uDAO.findOne(userId);
         if (user != null) user.setTempPassword(null);
     }
+
+    @Override
+    public boolean userCheckPass(User user, String pass){
+
+        if (user == null) return false;
+
+        if (userTempPassIsValid(user)
+                && user.getTempPassword().equals(pass)) return true;
+
+        if (user.getPassword().equals(pass)) return true;
+
+        return false;
+    }
+
+    @Override
+    public boolean userTempPassIsValid(User user){
+        if (user == null || user.getTempPassword() == null) {
+            return false;
+        }
+        double min = (System.currentTimeMillis() - user.getCreateTempPassword().getTime())/60000;
+        if (min > TEMP_PASS_TIME_VALID) {
+            clearTempPassword(user.getId());
+            System.out.println("User id:"+user.getId()+
+                    " -> Temp password cleared since expired validity!");
+            return false;
+        }
+        return true;
+    }
+
 }
