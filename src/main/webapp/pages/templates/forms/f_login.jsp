@@ -23,7 +23,7 @@
             <button type="submit" class="btn btn-success btn-block">Увійти</button>
             <span style="color: red"><sf:errors path="login"/></span>
             <hr style="margin-bottom: 0">
-            <a href="/user/passreccovery"><button type="button" class="btn btn-link fleft" style="margin-right: 10px">Забули пароль?</button></a>
+            <a href="/user/passrecovery"><button type="button" class="btn btn-link fleft" style="margin-right: 10px">Забули пароль?</button></a>
             <a href="/user/registration"><button type="button" class="btn btn-link fright">Зареєструватися</button></a>
         </div>
     </div>

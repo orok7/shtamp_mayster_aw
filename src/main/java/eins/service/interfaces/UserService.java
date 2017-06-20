@@ -1,4 +1,4 @@
-package eins.service;
+package eins.service.interfaces;
 
 import eins.entity.User;
 import java.util.List;

@@ -1,7 +1,8 @@
 package eins.controller;
 
 import eins.entity.User;
-import eins.service.UserService;
+import eins.service.interfaces.MailService;
+import eins.service.interfaces.UserService;
 import eins.service.edit.UserLoginEditor;
 import eins.service.valid.UserLoginValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,4 +82,12 @@ public class UserController {
         webDataBinder.registerCustomEditor(User.class,ulEditor);
     }
 
+    @Autowired
+    MailService mailService;
+
+    @GetMapping("/passrecovery")
+    public String passrecovery() {
+        mailService.sendMailRecPass("orestmykytyn@gmail.com","AXp4s5");
+        return "index";
+    }
 }

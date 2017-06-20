@@ -1,7 +1,6 @@
 package eins.service.edit;
 
-import eins.entity.User;
-import eins.service.UserService;
+import eins.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
