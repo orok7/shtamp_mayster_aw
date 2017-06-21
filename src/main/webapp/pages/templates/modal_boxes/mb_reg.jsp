@@ -6,8 +6,8 @@
     <div class="my-modal-content">
 
         <div class="my-modal-header">
-            <span class="close" id="closeReg">&times;</span>
-            <h2>Реєстрація</h2>
+            <span class="my-close" id="closeReg">&times;</span>
+            <h3 style="margin-top: 11px">Реєстрація</h3>
         </div>
 
         <div class="my-modal-body">

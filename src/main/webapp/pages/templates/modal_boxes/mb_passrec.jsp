@@ -5,8 +5,8 @@
     <div class="my-modal-content">
 
         <div class="my-modal-header">
-            <span class="close" id="closePR">&times;</span>
-            <h2>Відновлення паролю</h2>
+            <span class="my-close" id="closePR">&times;</span>
+            <h3 style="margin-top: 11px">Відновлення паролю</h3>
         </div>
 
         <div class="my-modal-body">

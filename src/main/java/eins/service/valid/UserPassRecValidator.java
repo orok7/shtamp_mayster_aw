@@ -21,9 +21,10 @@ public class UserPassRecValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         User user = (User) target;
-        User fUser = uService.findByLogin( user.getLogin() );;
+        User fUser = uService.findByLogin( user.getLogin() );
         if (fUser == null) {
             errors.rejectValue("login", "450","Невірний email");
         }
+
     }
 }

@@ -33,6 +33,11 @@ public class MainController {
         return new User();
     }
 
+    @ModelAttribute("regUser")
+    public User regUser() {
+        return new User();
+    }
+
     @GetMapping("/")
     public String index(@CookieValue(value = "loggedUserId", defaultValue = "-1")
             int loggedUserId, @RequestParam(required = false) String logoutingModDisplay,
@@ -45,7 +50,7 @@ public class MainController {
         if (loggedUserId != -1) {
             String userName = "";
             User user = uService.findOne(loggedUserId);
-            if (user.isCompany()) userName = user.getCompanyDate().getShortName();
+            if (user.getIsCompany()) userName = user.getCompanyDate().getShortName();
             else userName = user.getIndividualDate().getName() + " " + user.getIndividualDate().getSurname();
             model.addAttribute("loggedUserName", userName);
         } else {
@@ -60,72 +65,6 @@ public class MainController {
     public String buildIndex() {
 
         return "index";
-    }
-
-    @PostMapping("/regCompanyUser")
-    public String regCompanyUser(@RequestParam String userEmail,
-                                 @RequestParam String userPassword,
-                                 @RequestParam String userOwnership,
-                                 @RequestParam String userFullName,
-                                 @RequestParam String userShortName,
-                                 @RequestParam String userCode,
-                                 @RequestParam String userContactName,
-                                 @RequestParam String userContactSurname,
-                                 Model model, HttpServletRequest r) {
-
-        uService.save(userEmail, userPassword, userOwnership,
-                userFullName, userShortName, userCode,
-                userContactName, userContactSurname);
-//        makeContent(model, r.getRequestURI());
-        return "index";
-    }
-
-    @PostMapping("/regIndividualUser")
-    public String regIndividualUser(@RequestParam String userEmail,
-                                    @RequestParam String userPassword,
-                                    @RequestParam String userName,
-                                    @RequestParam String userSurname,
-                                    Model model, HttpServletRequest r) {
-
-        uService.save(userEmail, userPassword,
-                userName, userSurname);
-//        makeContent(model, r.getRequestURI());
-        return "index";
-    }
-
-    @PostMapping("/passRecovery")
-    public String recoveryPassword(@RequestParam String userEmailForRecovery,
-                                   Model model, HttpServletRequest r){
-        User user = uService.findByLogin(userEmailForRecovery);
-
-        if (user != null) {
-            if (!uService.userTempPassIsValid(user)) {
-                uService.setTempPassword(user.getId(), generateTempPass());
-                user = uService.findOne(user.getId());
-            }
-            double min = (System.currentTimeMillis() - user.getCreateTempPassword().getTime())/60000;
-            String msg = "Pass: " + user.getTempPassword() + " дійсний ще " + (5.0-min) + " хв.";
-            model.addAttribute("msgPlaceInIndex", msg);
-        }
-//        makeContent(model, r.getRequestURI());
-        return "index";
-    }
-
-    private String generateTempPass(){
-        String pass = "";
-        Random r = new Random();
-        List<Supplier<Integer>> funcs = new ArrayList<>();
-        // number char code [48 - 57]
-        funcs.add(() -> {return (r.nextInt(10)+48);});
-        // bigger = 65 - 90
-        funcs.add(() -> {return (r.nextInt(26)+65);});
-        // smaller = 97 - 122
-        funcs.add(() -> {return (r.nextInt(26)+97);});
-        for (int i = 0; i < 6; i++){
-            char ch = (char) (int) funcs.get(r.nextInt(3)).get();
-            pass += ch;
-        }
-        return pass;
     }
 
 //    private void makeContent(Model model, String uri){

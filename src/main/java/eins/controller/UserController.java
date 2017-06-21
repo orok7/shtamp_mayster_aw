@@ -6,6 +6,7 @@ import eins.service.interfaces.UserService;
 import eins.service.edit.UserLoginEditor;
 import eins.service.valid.UserLoginValidator;
 import eins.service.valid.UserPassRecValidator;
+import eins.service.valid.UserRegValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,33 +26,46 @@ import java.util.function.Supplier;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-    @Autowired
-    private UserService uService;
-    @Autowired
-    private UserLoginValidator ulValidator;
-    @Autowired
-    private UserPassRecValidator uprValidator;
 
-    @ModelAttribute("loggedUser")
-    public User loggedUser() {
-        return new User();
-    }
 
-    @ModelAttribute("passrecUser")
-    public User passrecUser() {
-        return new User();
-    }
+    @PostMapping("/regCompanyUser")
+    public String regCompanyUser(@RequestParam String urCOwnership,
+                                 @RequestParam String urCFullName,
+                                 @RequestParam String urCShortName,
+                                 @RequestParam String urCCode,
+                                 @RequestParam String urCContactName,
+                                 @RequestParam String urCContactSurname,
+                                 @ModelAttribute("regUser") @Validated User user,
+                                 BindingResult result, Model model) {
 
-    @GetMapping("/logining")
-    public String logining(Model model) {
-        model.addAttribute("loginingModDisplay", "block");
+        if (result.hasErrors()) {
+            model.addAttribute("regModDisplay", "block");
+            return "index";
+        }
+
+        uService.save(user.getLogin(), user.getPassword(), urCOwnership,
+                urCFullName, urCShortName, urCCode,
+                urCContactName, urCContactSurname);
+
         return "index";
     }
 
-    @GetMapping("/logouting")
-    public String logouting(Model model) {
-        model.addAttribute("logoutingModDisplay", "block");
-        return "redirect:/";
+
+
+    @PostMapping("/regIndividualUser")
+    public String regIndividualUser(@RequestParam String urIName,
+                                    @RequestParam String urISurname,
+                                    @ModelAttribute("regUser") @Validated User user,
+                                    BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("regModDisplay", "block");
+            return "index";
+        }
+
+        uService.save(user.getLogin(), user.getPassword(), urIName, urISurname);
+
+        return "index";
     }
 
     @PostMapping("/login")
@@ -61,7 +76,7 @@ public class UserController {
             return "index";
         }
 
-        String userName = "";
+        String userName;
         User fUser = uService.findByLogin(user.getLogin());
         Cookie cookie = new Cookie("loggedUserId", String.valueOf(fUser.getId()));
         cookie.setPath("/");
@@ -69,34 +84,40 @@ public class UserController {
         res.addCookie(cookie);
         System.out.println(String.valueOf(fUser.getId()));
 
-        if (fUser.isCompany()) userName = fUser.getCompanyDate().getShortName();
+        if (fUser.getIsCompany()) userName = fUser.getCompanyDate().getShortName();
         else userName = fUser.getIndividualDate().getName() + " " + fUser.getIndividualDate().getSurname();
         model.addAttribute("loggedUserName", userName);
 
         return "index";
     }
 
+
+
     @PostMapping("/passrecovery")
-    public String passrecovery(@ModelAttribute("loggedUser") @Validated User user,
+    public String passrecovery(@ModelAttribute("passrecUser") @Validated User user,
                                BindingResult result, Model model) {
 
         if (result.hasErrors()) {
             model.addAttribute("passRecModDisplay", "block");
             return "index";
         }
-
         User fUser = uService.findByLogin(user.getLogin());
 
         if (fUser != null) {
-            if (!uService.userTempPassIsValid(user)) {
-                uService.setTempPassword(user.getId(), generateTempPass());
-                user = uService.findOne(user.getId());
+            if (!uService.userTempPassIsValid(fUser)) {
+                uService.setTempPassword(fUser.getId(), generateTempPass());
+                System.out.println("sadasdasd");
+                fUser = uService.findOne(fUser.getId());
+                System.out.println(fUser);
+                System.out.println(fUser.getCreateTempPassword());
             }
-            double min = (System.currentTimeMillis() - user.getCreateTempPassword().getTime())/60000;
+            double min = (System.currentTimeMillis() - fUser.getCreateTempPassword().getTime())/60000;
             mailService.sendMailRecPass(fUser.getLogin(),fUser.getTempPassword(), (5.0-min));
         }
         return "index";
     }
+
+
 
     @GetMapping("/logout")
     public String logout(Model model, HttpServletResponse res) {
@@ -108,24 +129,81 @@ public class UserController {
         return "index";
     }
 
+
+    //////////////////////////////////////////////////////////////////////////
+
+
+    @GetMapping("/logining")
+    public String logining(Model model) {
+        model.addAttribute("loginingModDisplay", "block");
+        return "index";
+    }
+
+
+
+    @GetMapping("/logouting")
+    public String logouting(Model model) {
+        model.addAttribute("logoutingModDisplay", "block");
+        return "redirect:/";
+    }
+
+
+
+    @GetMapping("/passrecovering")
+    public String passrecovering(Model model) {
+        model.addAttribute("passRecModDisplay", "block");
+        return "index";
+    }
+
+
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        model.addAttribute("regModDisplay", "block");
+        return "index";
+    }
+
+
+    ///////////////////////////////////////////////////////////////////
+
+
     @InitBinder("passrecUser")
     public void pruBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(uprValidator);
     }
+
+
+
+    @InitBinder("regUser")
+    public void ruBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(urValidator);
+    }
+
+
 
     @InitBinder("loggedUser")
     public void luBinder(WebDataBinder webDataBinder) {
         webDataBinder.addValidators(ulValidator);
     }
 
+
+
+    //////////////////////////////////////////////////////////////////////////////
+
+
+
+    @Autowired
+    private UserService uService;
+    @Autowired
+    private UserLoginValidator ulValidator;
+    @Autowired
+    private UserPassRecValidator uprValidator;
+    @Autowired
+    private UserRegValidator urValidator;
     @Autowired
     MailService mailService;
 
-    @GetMapping("/passrecovering")
-    public String passrecovering(Model model) {
-        model.addAttribute("passRecModDisplay", "block");
-        return "redirect:/";
-    }
+
 
     private String generateTempPass(){
         String pass = "";
@@ -142,5 +220,26 @@ public class UserController {
             pass += ch;
         }
         return pass;
+    }
+
+
+
+    @ModelAttribute("loggedUser")
+    public User loggedUser() {
+        return new User();
+    }
+
+
+
+    @ModelAttribute("passrecUser")
+    public User passrecUser() {
+        return new User();
+    }
+
+
+
+    @ModelAttribute("regUser")
+    public User regUser() {
+        return new User();
     }
 }

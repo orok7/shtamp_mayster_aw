@@ -1,102 +1,115 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="/css/modal_registration.css">
+
 
 <sf:form id="formReg" class="form-horizontal" action="/user/regIndividualUser" method="post" modelAttribute="regUser">
 
-    <sf:checkbox path="isCompany" class="form-control" id="urIsCompany"/>
-    <label class="control-label col-sm-2" for="urIsCompany">Обліковий запис для юридичної особи</label>
-
+    <div class="checkbox">
+        <label><input type="checkbox" name="urIsCompany" id="urIsCompany"> Обліковий запис для юридичної особи</label>
+    </div>
+    <%--<label class="control-label col-sm-6" for="urIsCompany">Обліковий запис для юридичної особи</label>--%>
+    <%--<input type="checkbox" name="isCompany" id="urIsCompany">--%>
+    <%--<sf:checkbox path="isCompany" class="form-control" id="urIsCompany"/>--%>
+    <hr>
     <div class="form-group" id="urIndividualData">
+
         <div class="form-group">
-            <label class="control-label col-sm-2" for="urIName">Ім'я:</label>
-            <div class="col-sm-10">
-                <input id="urIName" type="text" name="urIName" placeholder="Петро" required>
+            <label class="control-label col-sm-4" for="urIName">Ім'я:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urIName" type="text" name="urIName" placeholder="Петро" required>
             </div>
         </div>
+
         <div class="form-group">
-            <label class="control-label col-sm-2" for="urISurname">Прізвище:</label>
-            <div class="col-sm-10">
-                <input id="urISurname" type="text" name="urISurname" placeholder="Петрів" required>
+            <label class="control-label col-sm-4" for="urISurname">Прізвище:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urISurname" type="text" name="urISurname" placeholder="Петрів" required>
             </div>
         </div>
+
     </div>
 
     <div class="form-group" id="urCompanyData">
+
         <div class="form-group">
-            <label class="control-label col-sm-2" for="urCOwnership">Форма власності:</label>
-            <div class="col-sm-10">
-                <input id="urCOwnership" type="text" name="urCOwnership" placeholder="Приватне підприємство" required>
+            <label class="control-label col-sm-4" for="urCOwnership">Форма власності:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCOwnership" type="text" name="urCOwnership" placeholder="Приватне підприємство">
             </div>
         </div>
+
         <div class="form-group">
-            <label class="control-label col-sm-2" for="urCFullName">Назва:</label>
-            <div class="col-sm-10">
-                <input id="urCFullName" type="text" name="urCFullName" placeholder="Ваша назва" required>
+            <label class="control-label col-sm-4" for="urCFullName">Назва:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCFullName" type="text" name="urCFullName" placeholder="Ваша назва">
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="urCShortName">Скорочена назва:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCShortName" type="text" name="urCShortName" placeholder="ПП ВашаНаз">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="urCCode">Код ЄДРПОУ:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCCode" type="text" name="urCCode" placeholder="01234567">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="urCContactName">Ім'я контактної особи:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCContactName" type="text" name="urCContactName" placeholder="Петро">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4" for="urCContactSurname">Прізвище контактної особи:</label>
+            <div class="col-sm-7">
+                <input class="form-control uData" id="urCContactSurname" type="text" name="urCContactSurname" placeholder="Петрів">
+            </div>
+        </div>
+
     </div>
-        <%--<div id="companyData">--%>
-            <%--<input class="ui" type="text" name="userOwnership" placeholder="Приватне підприємство">--%>
-            <%--&nbsp;&nbsp;&nbsp;Форма власності<br><br>--%>
-            <input class="ui" type="text" name="userFullName" placeholder="Ваша назва">
-            &nbsp;&nbsp;&nbsp;Назва<br><br>
-            <input class="ui" type="text" name="userShortName" placeholder="ПП ВашаНаз">
-            &nbsp;&nbsp;&nbsp;Скорочена назва<br><br>
-            <input class="ui" type="text" name="userCode" placeholder="01234567">
-            &nbsp;&nbsp;&nbsp;Код ЄДРПОУ<br><br>
-            <input class="ui" type="text" name="userContactName" placeholder="Петро">
-            &nbsp;&nbsp;&nbsp;Ім'я контактної особи<br><br>
-            <input class="ui" type="text" name="userContactSurname" placeholder="Петрів">
-            &nbsp;&nbsp;&nbsp;Прізвище контактної особи<br><br>
-        <%--</div>--%>
-        <input type="email" name="userEmail" placeholder="petro@domain.com" required>
-        &nbsp;&nbsp;&nbsp;E-mail<br><br>
-        <input type="password" name="userPassword" placeholder="password" required>
-        &nbsp;&nbsp;&nbsp;Пароль<br><br>
-        <input type="password" name="userPassAgain" placeholder="password" required>
-        &nbsp;&nbsp;&nbsp;Підтвердіть пароль<br>
-        <br><input type="checkbox" id="isAccepted">
-        Я приймаю <a href="#">умови</a> реєстрації<br><br>
-        <input type="submit" value="Зареєструвати" disabled id="submitReg">
-    </form>
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="form-group">
-        <label class="control-label col-sm-2" for="urEmail">Email:</label>
-        <div class="col-sm-10">
+        <label class="control-label col-sm-4" for="urEmail">Email:</label>
+        <div class="col-sm-7">
             <sf:input type="email" class="form-control" id="urEmail"
                       path="login" placeholder="Введіть Ваш Email"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-sm-2" for="urPassword">Пароль:</label>
-        <div class="col-sm-10">
+        <label class="control-label col-sm-4" for="urPassword">Пароль:</label>
+        <div class="col-sm-7">
             <sf:input type="password" class="form-control" id="urPassword"
-                      path="password" placeholder="Введіть пароль"/>
+                      path="password" placeholder="password"/>
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success btn-block">Увійти</button>
+        <label class="control-label col-sm-4" for="urPasswordAg">Підтвердіть пароль:</label>
+        <div class="col-sm-7">
+            <sf:input type="password" class="form-control" id="urPasswordAg"
+                      path="tempPassword" placeholder="password"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-7">
+            <button type="submit" class="btn btn-success btn-block">Зареєструвати</button>
             <span style="color: red"><sf:errors path="login"/></span>
-            <hr style="margin-bottom: 0">
-            <a href="/user/passrecovering"><button type="button" class="btn btn-link fleft" style="margin-right: 10px">Забули пароль?</button></a>
-            <a href="/user/registration"><button type="button" class="btn btn-link fright">Зареєструватися</button></a>
+            <span style="color: red"><sf:errors path="password"/></span>
         </div>
     </div>
 
 </sf:form>
+
+
 
 <script>
     function reloadAccepted() {
@@ -111,22 +124,22 @@
 </script>
 
 <script>
-    var regIsCompany = document.getElementById('isCompany');
-    var regIndividualData = document.getElementById('individualData');
-    var regCompanyData = document.getElementById("companyData");
+    var regIsCompany = document.getElementById('urIsCompany');
+    var regIndividualData = document.getElementById('urIndividualData');
+    var regCompanyData = document.getElementById("urCompanyData");
     regIsCompany.onclick = function () {
         if (regIsCompany.checked) {
             regIndividualData.style.display = "none";
             regCompanyData.style.display = "block";
-            document.getElementById("formReg").action = "/regCompanyUser";
+            document.getElementById("formReg").action = "/user/regCompanyUser";
         } else {
             regIndividualData.style.display = "block";
             regCompanyData.style.display = "none";
-            document.getElementById("formReg").action = "/regIndividualUser";
+            document.getElementById("formReg").action = "/user/regIndividualUser";
         }
-        var ui = document.getElementsByClassName("ui");
-        for (var i = 0; i < ui.length; i++){
-            ui[i].required = !ui[i].required;
+        var uData = document.getElementsByClassName("uData");
+        for (var i = 0; i < uData.length; i++){
+            uData[i].required = !uData[i].required;
         }
     }
 </script>

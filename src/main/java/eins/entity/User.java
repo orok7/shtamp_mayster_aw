@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,4 +50,7 @@ public class User {
         this.contacts.add(contacts);
     }
 
+    public boolean getIsCompany() {
+        return isCompany;
+    }
 }

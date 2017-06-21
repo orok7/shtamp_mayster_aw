@@ -56,11 +56,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         mailSender.setPassword("javatest");
         Properties properties = mailSender.getJavaMailProperties();
         properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.smtp.from", "orok.java@gmail.com");
-        properties.setProperty("mail.smtp.user", "orok.java@gmail.com");
-        properties.setProperty("mail.smtp.password", "javatest");
         properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-        properties.setProperty("mail.smtp.port", "587");
         properties.setProperty("mail.smtp.auth", "true");
         properties.setProperty("mail.smtp.starttls.enable", "true");
         properties.put("mail.debug", "true");

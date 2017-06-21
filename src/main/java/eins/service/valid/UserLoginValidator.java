@@ -22,7 +22,7 @@ public class UserLoginValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         User user = (User) target;
-        User fUser = uService.findByLogin( user.getLogin() );;
+        User fUser = uService.findByLogin( user.getLogin() );
         if (fUser == null || !uService.userCheckPass(fUser,user.getPassword())) {
             errors.rejectValue("login", "450","Невірний email або пароль");
         }
