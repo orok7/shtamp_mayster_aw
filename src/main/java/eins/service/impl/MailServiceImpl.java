@@ -17,7 +17,7 @@ public class MailServiceImpl implements MailService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public void sendMailRecPass(String email, String pass) {
+    public void sendMailRecPass(String email, String pass, double min) {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         try {
@@ -25,7 +25,7 @@ public class MailServiceImpl implements MailService {
             helper.setTo(new InternetAddress(email));
             helper.setText("Hello dear user.<br>" +
                     "If you didn't request to recover your password, please ignore this message.<br>" +
-                    "Otherwise, your temporary password is " + pass + ", valid for 5 minutes.<br>" +
+                    "Otherwise, your temporary password is " + pass + ", valid for " + min + " minutes.<br>" +
                     "Thank you for using our service!", true);
 
 

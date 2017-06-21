@@ -9,7 +9,7 @@
             <h3 style="margin-top: 11px">Вхід в обліковий запис</h3>
         </div>
 
-        <div class="modal-body">
+        <div class="my-modal-body">
             <%@include file="../forms/f_login.jsp" %>
         </div>
 

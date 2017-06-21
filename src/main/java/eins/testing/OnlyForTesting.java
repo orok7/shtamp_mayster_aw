@@ -9,20 +9,21 @@ import java.util.function.Supplier;
 public class OnlyForTesting {
 
     public static void main(String[] args) {
-        String pass = "";
-        Random r = new Random();
-        List<Supplier<Integer>> funcs = new ArrayList<>();
-        // number char code [48 - 57]
-        funcs.add(() -> {return (r.nextInt(10)+48);});
-        // bigger = 65 - 90
-        funcs.add(() -> {return (r.nextInt(26)+65);});
-        // smaller = 97 - 122
-        funcs.add(() -> {return (r.nextInt(26)+97);});
-        for (int i = 0; i < 6; i++){
-            char ch = (char) (int) funcs.get(r.nextInt(3)).get();
-            pass += ch;
+
+        try {
+            String value = "29.1";
+            System.out.println((Float.valueOf(value) + 1.0) == 30.1);
+            System.out.println((Double.valueOf(value) + 1.0) == 30.1);
+            System.out.println(Float.valueOf(value)/0);
+            System.out.println(Double.valueOf(value)/0);
         }
-        System.out.println(pass);
+        catch (NumberFormatException ex) {
+            System.out.println("NumberFormatException");
+        }
+        catch (ArithmeticException ex) {
+            System.out.println("ArithmeticException");
+        }
+
     }
 
 }

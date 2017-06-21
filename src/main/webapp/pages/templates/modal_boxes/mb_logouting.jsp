@@ -9,7 +9,7 @@
             <h3 style="margin-top: 11px">Вихід з облікового запису</h3>
         </div>
 
-        <div class="modal-body">
+        <div class="my-modal-body">
             <a href="/user/logout"><button class="btn btn-danger btn-block">Вийти</button></a>
         </div>
 

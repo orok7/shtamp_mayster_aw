@@ -28,6 +28,11 @@ public class MainController {
         return new User();
     }
 
+    @ModelAttribute("passrecUser")
+    public User passrecUser() {
+        return new User();
+    }
+
     @GetMapping("/")
     public String index(@CookieValue(value = "loggedUserId", defaultValue = "-1")
             int loggedUserId, @RequestParam(required = false) String logoutingModDisplay,
