@@ -1,9 +1,9 @@
 package eins.controller;
 
 import eins.entity.User;
+import eins.service.interfaces.DbService;
 import eins.service.interfaces.MailService;
 import eins.service.interfaces.UserService;
-import eins.service.edit.UserLoginEditor;
 import eins.service.valid.UserLoginValidator;
 import eins.service.valid.UserPassRecValidator;
 import eins.service.valid.UserRegValidator;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
