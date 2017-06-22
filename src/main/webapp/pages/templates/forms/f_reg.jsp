@@ -7,9 +7,7 @@
     <div class="checkbox">
         <label><input type="checkbox" name="urIsCompany" id="urIsCompany"> Обліковий запис для юридичної особи</label>
     </div>
-    <%--<label class="control-label col-sm-6" for="urIsCompany">Обліковий запис для юридичної особи</label>--%>
-    <%--<input type="checkbox" name="isCompany" id="urIsCompany">--%>
-    <%--<sf:checkbox path="isCompany" class="form-control" id="urIsCompany"/>--%>
+
     <hr>
     <div class="form-group" id="urIndividualData">
 

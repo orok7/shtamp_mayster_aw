@@ -68,6 +68,8 @@ public class UserController {
         return "index";
     }
 
+
+
     @PostMapping("/login")
     public String login(@ModelAttribute("loggedUser") @Validated User user,
                         BindingResult result, Model model, HttpServletResponse res) {
@@ -76,17 +78,15 @@ public class UserController {
             return "index";
         }
 
-        String userName;
         User fUser = uService.findByLogin(user.getLogin());
         Cookie cookie = new Cookie("loggedUserId", String.valueOf(fUser.getId()));
         cookie.setPath("/");
         cookie.setMaxAge(60*60*24*7);
         res.addCookie(cookie);
-        System.out.println(String.valueOf(fUser.getId()));
 
-        if (fUser.getIsCompany()) userName = fUser.getCompanyDate().getShortName();
-        else userName = fUser.getIndividualDate().getName() + " " + fUser.getIndividualDate().getSurname();
-        model.addAttribute("loggedUserName", userName);
+        if (fUser.getLogin().equalsIgnoreCase("admin@admin")) {
+            return "redirect:/init/adminPage";
+        }
 
         return "index";
     }
@@ -106,7 +106,6 @@ public class UserController {
         if (fUser != null) {
             if (!uService.userTempPassIsValid(fUser)) {
                 uService.setTempPassword(fUser.getId(), generateTempPass());
-                System.out.println("sadasdasd");
                 fUser = uService.findOne(fUser.getId());
                 System.out.println(fUser);
                 System.out.println(fUser.getCreateTempPassword());
@@ -120,13 +119,12 @@ public class UserController {
 
 
     @GetMapping("/logout")
-    public String logout(Model model, HttpServletResponse res) {
-        model.addAttribute("loggedUserName", "none");
+    public String logout(HttpServletResponse res) {
         Cookie cookie = new Cookie("loggedUserId", "-1");
         cookie.setPath("/");
         cookie.setMaxAge(60*60*24*7);
         res.addCookie(cookie);
-        return "index";
+        return "redirect:/init/index";
     }
 
 
