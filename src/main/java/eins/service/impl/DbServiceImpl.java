@@ -1,3 +1,4 @@
+/*
 package eins.service.impl;
 
 import eins.dao.DbDAO;
@@ -28,3 +29,4 @@ public class DbServiceImpl<T> implements DbService<T> {
         return dbDAO.findAll();
     }
 }
+*/
