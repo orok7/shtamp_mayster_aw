@@ -19,4 +19,9 @@ public class ProductToBuy{
     @ManyToOne(fetch = FetchType.LAZY)
     private Invoice invoice;
     private int number;
+
+    @Override
+    public String toString() {
+        return product.getName();
+    }
 }

@@ -21,4 +21,8 @@ public class Characteristic {
     @OneToOne(fetch = FetchType.LAZY)
     private PropertyValue propertyValue;
 
+    @Override
+    public String toString() {
+        return property.getName() + propertyValue.getValue();
+    }
 }

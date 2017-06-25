@@ -84,7 +84,7 @@ public class UserController {
         res.addCookie(cookie);
 
         if (fUser.getLogin().equalsIgnoreCase("admin@admin")) {
-            return "redirect:/init/adminPage";
+            return "redirect:/admin/adminPage";
         }
 
         return "index";

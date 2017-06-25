@@ -19,4 +19,9 @@ public class CarrierDepartment {
     private String name;
     @OneToOne(fetch = FetchType.LAZY)
     private Address address;
+
+    @Override
+    public String toString() {
+        return carrier.getName() + ", " + name + ", " + address;
+    }
 }

@@ -3,6 +3,7 @@ package eins.service.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -10,16 +11,20 @@ import java.util.List;
 
 public class ClassUtil {
 
-    public static List<String> getNames(String packageName, String without) throws IOException, ClassNotFoundException {
+    public static List<String> getNames(String packageName, String classSuffix) throws IOException, ClassNotFoundException {
 
         List<String> list = new ArrayList<>();
 
         Class[] classes = getClasses(packageName);
         for (Class clazz: classes) {
-            list.add(clazz.getSimpleName().replace(without, ""));
+            list.add(clazz.getSimpleName().replace(classSuffix, ""));
         }
 
         return list;
+    }
+
+    public static Object newInstance(Class<?> clazz) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        return (Object) clazz.getConstructor().newInstance();
     }
 
     private static Class[] getClasses(String packageName)

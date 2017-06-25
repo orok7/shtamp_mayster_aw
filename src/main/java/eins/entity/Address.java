@@ -19,4 +19,11 @@ public class Address {
     private String street;
     private String building;
     private int room;
+
+    @Override
+    public String toString() {
+        return city + ", вул." + street +
+                ", " + building +
+                "/ " + room;
+    }
 }

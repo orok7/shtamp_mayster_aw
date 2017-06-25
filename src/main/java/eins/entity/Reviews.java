@@ -17,4 +17,10 @@ public class Reviews {
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
     private String reviews;
+
+    @Override
+    public String toString() {
+        return product.getName() +
+                " - " + reviews;
+    }
 }

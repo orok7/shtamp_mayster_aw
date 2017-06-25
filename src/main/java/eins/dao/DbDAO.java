@@ -1,9 +1,14 @@
 /*
 package eins.dao;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
-public interface DbDAO <T> extends JpaRepository<T,Integer> {
+import java.util.List;
+
+@NoRepositoryBean
+public interface DbDAO<T>  {
+
+    List<T> findAll();
 
 }
 */

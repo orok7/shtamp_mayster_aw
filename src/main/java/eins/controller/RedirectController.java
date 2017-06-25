@@ -2,10 +2,14 @@ package eins.controller;
 
 import eins.entity.User;
 import eins.service.interfaces.UserService;
+import eins.service.utils.ClassUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/init")
@@ -31,19 +35,6 @@ public class RedirectController {
         }
 
         return "index";
-    }
-
-
-
-    @GetMapping("/adminPage")
-    public String adminPage(@CookieValue(value = "loggedUserId", defaultValue = "-1") int loggedUserId){
-        if (loggedUserId != -1) {
-            User user = uService.findOne(loggedUserId);
-            if (user.getLogin().equalsIgnoreCase("admin@admin")){
-                return "adminPage";
-            }
-        }
-        return "redirect:/init/index";
     }
 
     ///////////////////////////////////////////////////////////////////

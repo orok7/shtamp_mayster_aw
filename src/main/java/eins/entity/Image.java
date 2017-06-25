@@ -15,5 +15,10 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Blob image;
+    private String path;
+
+    @Override
+    public String toString() {
+        return path.substring(path.lastIndexOf('/')+1);
+    }
 }

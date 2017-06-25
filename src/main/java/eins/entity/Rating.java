@@ -17,4 +17,10 @@ public class Rating {
     @ManyToOne(fetch = FetchType.LAZY)
     private Product product;
     private double rating;
+
+    @Override
+    public String toString() {
+        return product.getName() +
+                " - " + rating;
+    }
 }

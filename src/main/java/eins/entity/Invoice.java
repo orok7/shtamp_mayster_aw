@@ -31,4 +31,9 @@ public class Invoice {
     private PaymentType paymentType;
     @OneToOne(fetch = FetchType.LAZY)
     private Delivery delivery;
+
+    @Override
+    public String toString() {
+        return buyer.getLogin() + " " + date + " " + sum + " грн.";
+    }
 }

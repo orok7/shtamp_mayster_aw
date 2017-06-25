@@ -2,12 +2,10 @@ package eins.service.interfaces;
 
 import java.util.List;
 
-public interface DbService<T> {
+public interface DbService {
 
-    void save(T o);
+    void save(Object o, Class<?> clazz);
 
-    T findOne(int id);
-
-    List<T> findAll();
+    List<Object> findAll(Class<?> clazz);
 
 }

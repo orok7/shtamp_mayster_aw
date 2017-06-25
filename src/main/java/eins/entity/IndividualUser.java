@@ -16,4 +16,13 @@ public class IndividualUser{
     private int id;
     private String name;
     private String surname;
+
+    @Override
+    public String toString() {
+        return "IndividualUser{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
+    }
 }
