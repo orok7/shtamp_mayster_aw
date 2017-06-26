@@ -96,6 +96,9 @@ public class UserController {
     public String passrecovery(@ModelAttribute("passrecUser") @Validated User user,
                                BindingResult result, Model model) {
 
+        //System.out.println(user);
+//        user = (User) user;
+
         if (result.hasErrors()) {
             model.addAttribute("passRecModDisplay", "block");
             return "index";

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <sf:form class="form-horizontal" action="/admin/saveSome${entityName}"
-         method="post" modelAttribute="someEntity">
+         method="get" modelAttribute="someEntity">
 
     <c:set var="efI" value="${0}"/>
     <c:forEach items="${entityFields}" var="entityField">

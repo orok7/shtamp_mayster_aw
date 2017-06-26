@@ -17,6 +17,21 @@ import java.util.List;
 @Entity
 @Builder
 public class User {
+
+//    id=0
+//    login=
+//    password=
+//    tempPassword=
+//    discount=0
+//    isCompany=false
+//    _contacts=1
+//    note=
+//    dateOfRegistration=
+//    createTempPassword=
+//    companyDate=2
+//    individualDate=8
+//    _invoices=1
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -39,12 +40,16 @@ public class AdminController {
         return list;
     }
 
-    @PostMapping("/saveSome{clazz}")
+    @GetMapping("/saveSome{clazz}")
     public String saveSomeEntity(@PathVariable("clazz") String className,
-                                 //@ModelAttribute("someEntity") Object someEntity,
+                                 @ModelAttribute("someEntity") @Validated Object someEntity,
                                     Model model) throws ClassNotFoundException {
 
 
+        System.out.println(someEntity);
+        className = packageName + "." + className;
+        Class.forName(className).cast(someEntity);
+        System.out.println(someEntity);
 
         return "adminPage";
     }
@@ -67,7 +72,11 @@ public class AdminController {
         String selectedClass = packageName + "." + listEntities + classSuffix;
         try {
             SomeClass sc = new SomeClass(selectedClass, dbService);
-            model.addAttribute("someEntity", sc.getEntityClass().cast(ClassUtil.newInstance(sc.getEntityClass())));
+            Object cast = sc.getEntityClass().cast(ClassUtil.newInstance(sc.getEntityClass()));
+            System.out.println("--------------------------------");
+            System.out.println(cast);
+            System.out.println("--------------------------------");
+            model.addAttribute("someEntity", cast);
             model.addAttribute("entityFields", sc.getFields());
             model.addAttribute("entityName", sc.getEntityClass().getSimpleName());
             model.addAttribute("showBuildedForm", "true");
@@ -91,6 +100,17 @@ public class AdminController {
             }
         }
         return "redirect:/init/index";
+    }
+
+
+
+    ////////////////////////////////////////////////////////////////////////
+
+
+
+    @InitBinder("someEntity")
+    public void ruBinder(WebDataBinder webDataBinder) {
+
     }
 
 

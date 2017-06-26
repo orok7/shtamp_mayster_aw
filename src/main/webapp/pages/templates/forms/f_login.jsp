@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<sf:form class="form-horizontal" action="/user/login" method="post" modelAttribute="loggedUser">
+<sf:form class="form-horizontal" action="/user/login" method="post"
+         modelAttribute="loggedUser">
 
     <div class="form-group">
         <label class="control-label col-sm-2" for="uliEmail">Email:</label>

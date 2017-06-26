@@ -18,9 +18,9 @@ public class Rating {
     private Product product;
     private double rating;
 
-    @Override
+    /*@Override
     public String toString() {
-        return product.getName() +
+        return (product==null)?"null":product.getName() +
                 " - " + rating;
-    }
+    }*/
 }

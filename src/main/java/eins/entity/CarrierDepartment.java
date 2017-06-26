@@ -22,6 +22,6 @@ public class CarrierDepartment {
 
     @Override
     public String toString() {
-        return carrier.getName() + ", " + name + ", " + address;
+        return (carrier == null)?"null":carrier.getName() + ", " + name + ", " + address;
     }
 }
