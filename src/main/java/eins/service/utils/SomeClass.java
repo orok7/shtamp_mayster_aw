@@ -39,7 +39,7 @@ public class SomeClass {
 
     @Override
     public String toString() {
-        return "\n\nClass: " + entityClass.getName() +
+        return "\n\nClass: " + ((entityClass == null)?"null":entityClass.getName()) +
                 "\nFields:" + fields;
     }
 }

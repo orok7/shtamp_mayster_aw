@@ -40,16 +40,18 @@ public class AdminController {
         return list;
     }
 
+    @ModelAttribute("someEntity") public SomeClass someEntity() { return new SomeClass(); }
+
     @GetMapping("/saveSome{clazz}")
     public String saveSomeEntity(@PathVariable("clazz") String className,
-                                 @ModelAttribute("someEntity") @Validated Object someEntity,
+                                 @ModelAttribute("someEntity") Object someEntity,
                                     Model model) throws ClassNotFoundException {
 
 
-        System.out.println(someEntity);
-        className = packageName + "." + className;
-        Class.forName(className).cast(someEntity);
-        System.out.println(someEntity);
+        System.out.println(someEntity.getClass());
+//        className = packageName + "." + className;
+//        Class.forName(className).cast(someEntity);
+//        System.out.println(someEntity);
 
         return "adminPage";
     }
@@ -60,7 +62,7 @@ public class AdminController {
         return "redirect:/user/logout";
     }
 
-    @PostMapping("/buildForm")
+    @GetMapping("/buildForm")
     public String buildForm(@RequestParam String listEntities,
                             Model model) {
 
@@ -72,18 +74,14 @@ public class AdminController {
         String selectedClass = packageName + "." + listEntities + classSuffix;
         try {
             SomeClass sc = new SomeClass(selectedClass, dbService);
-            Object cast = sc.getEntityClass().cast(ClassUtil.newInstance(sc.getEntityClass()));
-            System.out.println("--------------------------------");
-            System.out.println(cast);
-            System.out.println("--------------------------------");
-            model.addAttribute("someEntity", cast);
-            model.addAttribute("entityFields", sc.getFields());
+//            Object cast = sc.getEntityClass().cast(ClassUtil.newInstance(sc.getEntityClass()));
+            model.addAttribute("someEntity", sc);
+            System.out.println(sc);
+            //model.addAttribute("entityFields", sc.getFields());
             model.addAttribute("entityName", sc.getEntityClass().getSimpleName());
             model.addAttribute("showBuildedForm", "true");
 
-        } catch (ClassNotFoundException | NoSuchMethodException
-                | InstantiationException | IllegalAccessException
-                | InvocationTargetException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -108,12 +106,10 @@ public class AdminController {
 
 
 
-    @InitBinder("someEntity")
-    public void ruBinder(WebDataBinder webDataBinder) {
-
-    }
-
-
+//    @InitBinder("someEntity")
+//    public void seBinder(WebDataBinder webDataBinder) {
+//
+//    }
 
     ////////////////////////////////////////////////////////////////////////
 

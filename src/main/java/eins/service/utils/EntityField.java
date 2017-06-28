@@ -70,6 +70,8 @@ public class EntityField {
 
             case "string": if (f.getName().equalsIgnoreCase("path"))
                 inputType = "file";
+                else
+                inputType =  "text";
                 break;
 
             default: inputType =  "text";

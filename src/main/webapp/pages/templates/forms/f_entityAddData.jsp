@@ -7,7 +7,11 @@
     <c:forEach items="${entityFields}" var="entityField">
         
         <div class="form-group">
-            <label class="control-label col-sm-4" for="efInput${efI = efI + 1}">${entityField.fieldName}:</label>
+
+            <label class="control-label col-sm-4" for="efInput${efI = efI + 1}">
+                    ${entityField.fieldName}:
+            </label>
+
             <div class="col-sm-7">
                 
                 <c:choose>

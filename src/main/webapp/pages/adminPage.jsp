@@ -7,7 +7,7 @@
 <hr>
 <br>
 <div class="container">
-    <form class="form-horizontal" action="/admin/buildForm" method="post">
+    <form class="form-horizontal" action="/admin/buildForm" method="get">
 
         <div class="form-group">
 

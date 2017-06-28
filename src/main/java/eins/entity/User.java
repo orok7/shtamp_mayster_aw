@@ -15,42 +15,36 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Builder
+//@Builder
 public class User {
-
-//    id=0
-//    login=
-//    password=
-//    tempPassword=
-//    discount=0
-//    isCompany=false
-//    _contacts=1
-//    note=
-//    dateOfRegistration=
-//    createTempPassword=
-//    companyDate=2
-//    individualDate=8
-//    _invoices=1
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String login;
     private String password;
     private String tempPassword;
     private int discount;
     private boolean isCompany;
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Contacts> contacts = new ArrayList<>();
+
     private String note;
+
     @CreationTimestamp
     private Timestamp dateOfRegistration;
+
     @UpdateTimestamp
     private Timestamp createTempPassword;
+
     @OneToOne(fetch = FetchType.EAGER)
     private CompanyUser companyDate;
+
     @OneToOne(fetch = FetchType.EAGER)
     private IndividualUser individualDate;
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<Invoice> invoices = new ArrayList<>();
 
