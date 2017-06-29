@@ -60,8 +60,8 @@ public class EntityField {
                 else inputType = "number";
                 break;
 
-            case "datetime": case "timestamp":
-                inputType = "datetime";
+            case "timestamp":
+                inputType = "hidden";
                 break;
 
             case "date":

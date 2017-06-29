@@ -4,9 +4,16 @@ import eins.service.interfaces.DbService;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.apache.log4j.lf5.util.LogMonitorAdapter.newInstance;
 
 @Getter
 @Setter
@@ -31,10 +38,30 @@ public class SomeClass {
         init(classFullName, dbService);
     }
 
-//    public static SomeClass newInstance(String classFullName, DbService dbService) throws ClassNotFoundException {
-//        SomeClass someClass = new SomeClass();
-//        someClass.init(classFullName, dbService);
-//        return someClass;
+    public Map<String,String> getFieldsMap(){
+        if (fields == null || entityClass == null) return null;
+        Map<String,String> map = new HashMap<>();
+        for (EntityField ef: fields)
+            map.put(ef.getFieldName(),ef.getFieldStringValue());
+        return map;
+    }
+
+//    public Object getInstance(DbService dbService) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+//        if (fields == null || entityClass == null) return null;
+//
+//        Constructor<?> allArgs = null;
+//        Constructor<?>[] constructors = entityClass.getConstructors();
+//        for (Constructor<?> con: constructors) {
+//            if (fields.size() == con.getParameterCount()) {
+//                allArgs = con;
+//            }
+//        }
+//        if (allArgs == null) return null;
+//
+//        Parameter[] parameters = allArgs.getParameters();
+//        Object o = allArgs.newInstance(-1, -2, -3);
+//
+//        return o;
 //    }
 
     @Override

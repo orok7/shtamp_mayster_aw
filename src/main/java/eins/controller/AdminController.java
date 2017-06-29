@@ -1,5 +1,7 @@
 package eins.controller;
 
+import eins.entity.City;
+import eins.entity.Mapable;
 import eins.entity.User;
 import eins.service.interfaces.CompanyUserService;
 import eins.service.interfaces.DbService;
@@ -15,9 +17,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -40,18 +44,44 @@ public class AdminController {
         return list;
     }
 
-    @ModelAttribute("someEntity") public SomeClass someEntity() { return new SomeClass(); }
+//    @ModelAttribute("someEntity") public SomeClass someEntity() { return new SomeClass(); }
 
     @GetMapping("/saveSome{clazz}")
     public String saveSomeEntity(@PathVariable("clazz") String className,
-                                 @ModelAttribute("someEntity") Object someEntity,
-                                    Model model) throws ClassNotFoundException {
+//                                 @ModelAttribute("someEntity") Object someEntity,
+                                 Model model, HttpServletRequest rq) throws Exception {
 
+        className = packageName + "." + className;
+        SomeClass someEntity = new SomeClass(className, dbService);
+        System.out.println(someEntity.getEntityClass());
+        for (String res : rq.getParameterValues("login"))
+            System.out.println(res);
 
-        System.out.println(someEntity.getClass());
-//        className = packageName + "." + className;
-//        Class.forName(className).cast(someEntity);
-//        System.out.println(someEntity);
+        someEntity.setFields(someEntity.getFields()
+                .stream()
+                .map(o -> {
+                    String[] pv = rq.getParameterValues(o.getFieldName());
+                    String res = "";
+                    if (pv!=null) {
+                        if (pv.length > 1) for (String p : pv) res += p + "@&";
+                        else res = pv[0];
+                    } else res = null;
+                    o.setFieldStringValue(res);
+                    return o;
+                })
+        .collect(Collectors.toList()));
+
+        Map<String,String> map = someEntity.getFieldsMap();
+        System.out.println(map);
+
+        Mapable<?> mapable = (Mapable<?>) ClassUtil.newInstance(someEntity.getEntityClass());
+
+        Object o = mapable.parseFromMap(map, dbService);
+
+        System.out.println(o.getClass());
+        System.out.println(o);
+
+        dbService.save(o,someEntity.getEntityClass());
 
         return "adminPage";
     }
@@ -75,9 +105,9 @@ public class AdminController {
         try {
             SomeClass sc = new SomeClass(selectedClass, dbService);
 //            Object cast = sc.getEntityClass().cast(ClassUtil.newInstance(sc.getEntityClass()));
-            model.addAttribute("someEntity", sc);
-            System.out.println(sc);
-            //model.addAttribute("entityFields", sc.getFields());
+//            model.addAttribute("someEntity", sc);
+//            System.out.println(sc);
+            model.addAttribute("entityFields", sc.getFields());
             model.addAttribute("entityName", sc.getEntityClass().getSimpleName());
             model.addAttribute("showBuildedForm", "true");
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @Transactional
@@ -20,6 +21,11 @@ public class CityServiceImpl implements CityService {
     public void save(City o) {
         dbDAO.save(o);
     }
+
+    /*@Override
+    public void save(Map<String, String> map) throws Exception {
+        dbDAO.save(City.parseFromMap(map));
+    }*/
 
     @Override
     public City findOne(int id) {

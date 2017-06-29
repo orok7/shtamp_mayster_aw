@@ -35,7 +35,7 @@
 </div>
 
 <c:if test="${showBuildedForm}">
-    <%@include file="templates/forms/fs_entityAddData.jsp" %>
+    <%@include file="templates/forms/f_entityAddData.jsp" %>
 </c:if>
 
 </body>

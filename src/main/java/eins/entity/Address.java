@@ -1,8 +1,10 @@
 package eins.entity;
 
+import eins.service.interfaces.DbService;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -10,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Address {
+public class Address implements Mapable<Address> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -25,5 +27,30 @@ public class Address {
         return city + ", вул." + street +
                 ", " + building +
                 "/ " + room;
+    }
+
+    @Override
+    public Address parseFromMap(Map<String, String> map, DbService dbService) throws Exception {
+        int id;
+
+        String strId = map.get("id");
+        String sCityId = map.get("city");
+        String street = map.get("street");
+        String building = map.get("building");
+        String sRoom = map.get("room");
+        int iRoom;
+        int iCityId;
+
+        try { id = Integer.valueOf(strId); } catch (NumberFormatException e) {id = 0;}
+
+        City city = null;
+        try { iCityId = Integer.valueOf(sCityId); } catch (NumberFormatException e) { iCityId = -1;}
+        if (iCityId != -1) city = (City) dbService.findOne(iCityId, City.class);
+
+        if (street == null || building == null) throw new Exception("Wrong map");
+
+        try { iRoom = Integer.valueOf(sRoom); } catch (NumberFormatException e) {iRoom = 0;}
+
+        return new Address(id,city,street,building,iRoom);
     }
 }

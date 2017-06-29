@@ -16,7 +16,7 @@
 
                     <c:when test="${entityField.inputType == 'select'}">
 
-                        <sf:select class="form-control" path="fields">
+                        <sf:select class="form-control" path="fields.fieldStringValue">
                             <c:forEach items="${entityField.fieldObjectValue}" var="objectVal">
                                 <sf:option value="${objectVal.id}">${objectVal}</sf:option>
                             </c:forEach>
@@ -26,7 +26,7 @@
 
                     <c:when test="${entityField.inputType == 'multi-select'}">
 
-                        <sf:select class="form-control" path="fields">
+                        <sf:select class="form-control" path="fields.fieldStringValue">
                             <c:forEach items="${entityField.fieldObjectValue}" var="objectVal">
                                 <sf:option value="${objectVal.id}">${objectVal}</sf:option>
                             </c:forEach>
@@ -36,7 +36,7 @@
 
                     <c:otherwise>
                         <sf:input type="${entityField.inputType}" class="form-control"
-                                  path="fields" placeholder="${entityField.fieldName}"/>
+                                  path="fields.fieldStringValue" placeholder="${entityField.fieldName}"/>
 
                     </c:otherwise>
 
