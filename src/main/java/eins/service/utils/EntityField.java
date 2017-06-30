@@ -4,12 +4,12 @@ import eins.service.interfaces.DbService;
 import lombok.*;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
 @Setter
 @NoArgsConstructor
-//@AllArgsConstructor
 public class EntityField {
 
     private Class<?> fieldType;
@@ -80,28 +80,6 @@ public class EntityField {
         return this;
 
     }
-
-    /*
-    public static EntityField newInstance(Field f) throws ClassNotFoundException {
-        Class<?> type = f.getType();
-        String name = f.getName();
-        boolean isCollection = false;
-        Object fieldObjectValue = null;
-        if (Collection.class.isAssignableFrom(f.getType())) {
-            isCollection = true;
-            type = getGenericType(f);
-            fieldObjectValue = new EntityField().dbService.findAll(type);
-        }
-        String typeForInput = initInputType(type, name);
-        return EntityField.builder()
-                .fieldType(type)
-                .fieldName(name)
-                .inputType(typeForInput)
-                .isCollection(isCollection)
-                .fieldObjectValue(fieldObjectValue)
-                .build();
-    }
-    */
 
     public static Class<?> getGenericType (Field f) throws ClassNotFoundException {
         Class<?> clazz = f.getType();

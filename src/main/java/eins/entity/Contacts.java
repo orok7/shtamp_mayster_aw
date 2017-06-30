@@ -17,11 +17,11 @@ public class Contacts {
     private String name;
     private String surname;
     private String phoneNumber;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Carrier carrier;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private CarrierDepartment carrierDepartment;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Address homeAddress;
 
     public Contacts (String name, String surname) {

@@ -16,7 +16,6 @@ public class ClassUtil {
 
         Class[] classes = getClasses(packageName);
         for (Class clazz: classes) {
-            System.out.println(clazz);
             list.add(clazz.getSimpleName().replace(classSuffix, ""));
         }
 

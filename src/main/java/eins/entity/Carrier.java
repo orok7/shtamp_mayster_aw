@@ -20,7 +20,7 @@ public class Carrier implements Mapable<Carrier> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.EAGER)
     private List<CarrierDepartment> departments = new ArrayList<>();
 
     @Override
@@ -34,5 +34,10 @@ public class Carrier implements Mapable<Carrier> {
         checkObjects(map.get("departments"), departments, dbService, CarrierDepartment.class);
 
         return new Carrier(id, name, departments);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

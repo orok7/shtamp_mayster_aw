@@ -40,8 +40,7 @@ public class AdminController {
 
     @GetMapping("/saveSome{clazz}")
     public String saveSomeEntity(@PathVariable("clazz") String className,
-//                                 @ModelAttribute("someEntity") Object someEntity,
-                                 Model model, HttpServletRequest rq) throws Exception {
+                                 HttpServletRequest rq) throws Exception {
 
         className = packageName + "." + className;
         SomeClass someEntity = new SomeClass(className, dbService);

@@ -16,7 +16,7 @@ public class Address implements Mapable<Address> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private City city;
     private String street;
     private String building;
@@ -24,7 +24,7 @@ public class Address implements Mapable<Address> {
 
     @Override
     public String toString() {
-        return city + ", вул." + street +
+        return /*city + */", вул." + street +
                 ", " + building +
                 "/ " + room;
     }
