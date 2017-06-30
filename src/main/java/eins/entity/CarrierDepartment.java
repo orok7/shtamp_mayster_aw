@@ -1,11 +1,10 @@
 package eins.entity;
 
 import eins.service.interfaces.DbService;
+import eins.service.utils.Mapable;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -30,27 +29,15 @@ public class CarrierDepartment implements Mapable<CarrierDepartment> {
     }
 
     @Override
-    public CarrierDepartment parseFromMap(Map<String, String> map, DbService dbService) throws Exception {
-        int id;
+    public CarrierDepartment parseFromMap(Map<String, String> map, DbService dbService){
 
-        String strId = map.get("id");
-        String sCarrier = map.get("carrier");
         String name = map.get("name");
-        String sAddress = map.get("address");
-        int carrierId;
-        int addressId;
 
-        try { id = Integer.valueOf(strId); } catch (NumberFormatException e) { id = 0; }
+        int id = checkInt(map.get("id"));
 
-        if (name == null) throw new Exception("Wrong map");
+        Carrier carrier = (Carrier) checkObject(map.get("carrier"), dbService, Carrier.class);
 
-        Carrier carrier = null;
-        try { carrierId = Integer.valueOf(sCarrier); } catch (NumberFormatException e) { carrierId = -1;}
-        if (carrierId != -1) carrier = (Carrier) dbService.findOne(carrierId, Carrier.class);
-
-        Address address = null;
-        try { addressId = Integer.valueOf(sAddress); } catch (NumberFormatException e) { addressId = -1;}
-        if (addressId != -1) address = (Address) dbService.findOne(addressId, Address.class);
+        Address address = (Address) checkObject(map.get("address"), dbService, Address.class);
 
         return new CarrierDepartment(id, carrier, name, address);
     }

@@ -1,9 +1,8 @@
 package eins.entity;
 
-import eins.service.interfaces.CityService;
 import eins.service.interfaces.DbService;
+import eins.service.utils.Mapable;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,15 +24,11 @@ public class City implements Mapable<City> {
     private String name;
 
     @Override
-    public City parseFromMap(Map<String, String> map, DbService dbService) throws Exception {
-        int id;
+    public City parseFromMap(Map<String, String> map, DbService dbService){
 
-        String strId = map.get("id");
         String name = map.get("name");
 
-        if (name == null) throw new Exception("Wrong map");
-
-        try { id = Integer.valueOf(strId); } catch (NumberFormatException e) {id = 0;}
+        int id = checkInt(map.get("id"));
 
         return new City(id,name);
     }

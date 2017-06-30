@@ -1,28 +1,20 @@
 package eins.controller;
 
-import eins.entity.City;
-import eins.entity.Mapable;
+import eins.service.utils.Mapable;
 import eins.entity.User;
-import eins.service.interfaces.CompanyUserService;
 import eins.service.interfaces.DbService;
 import eins.service.interfaces.UserService;
 import eins.service.utils.ClassUtil;
-import eins.service.utils.EntityField;
 import eins.service.utils.SomeClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Controller
@@ -54,8 +46,6 @@ public class AdminController {
         className = packageName + "." + className;
         SomeClass someEntity = new SomeClass(className, dbService);
         System.out.println(someEntity.getEntityClass());
-        for (String res : rq.getParameterValues("login"))
-            System.out.println(res);
 
         someEntity.setFields(someEntity.getFields()
                 .stream()

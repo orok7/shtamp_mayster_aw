@@ -46,6 +46,10 @@ public class SomeClass {
         return map;
     }
 
+    /*public <T> T getObjectFromMap(Map<String,String> map){
+        return null;
+    }*/
+
 //    public Object getInstance(DbService dbService) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
 //        if (fields == null || entityClass == null) return null;
 //

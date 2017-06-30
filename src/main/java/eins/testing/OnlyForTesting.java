@@ -1,23 +1,23 @@
 package eins.testing;
 
 
-import eins.entity.User;
+import eins.service.utils.ClassUtil;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Parameter;
-import java.lang.reflect.TypeVariable;
+import java.io.IOException;
+import java.util.List;
 
 public class OnlyForTesting {
 
     public static void main(String[] args) throws NoSuchMethodException {
 
-        String in = "9@&10@&13@&15@&";
-
-        int i=0;
-
-        for (String s : in.split("@&")) {
-            System.out.println(++i + ": " + s);
+        List<String> list = null;
+        try {
+            list = ClassUtil.getNames("eins.entity", "");
+            list.add(0,"- Please select table -");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
+        System.out.println(list);
     }
 
 }

@@ -1,6 +1,5 @@
 package eins.service.utils;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -17,6 +16,7 @@ public class ClassUtil {
 
         Class[] classes = getClasses(packageName);
         for (Class clazz: classes) {
+            System.out.println(clazz);
             list.add(clazz.getSimpleName().replace(classSuffix, ""));
         }
 

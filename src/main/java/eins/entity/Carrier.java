@@ -1,6 +1,7 @@
 package eins.entity;
 
 import eins.service.interfaces.DbService;
+import eins.service.utils.Mapable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,28 +24,14 @@ public class Carrier implements Mapable<Carrier> {
     private List<CarrierDepartment> departments = new ArrayList<>();
 
     @Override
-    public Carrier parseFromMap(Map<String, String> map, DbService dbService) throws Exception {
-        int id;
+    public Carrier parseFromMap(Map<String, String> map, DbService dbService) {
 
-        String strId = map.get("id");
         String name = map.get("name");
-        String sDepartments = map.get("departments");
+
+        int id = checkInt(map.get("id"));
+
         List<CarrierDepartment> departments = new ArrayList<>();
-
-        try { id = Integer.valueOf(strId); } catch (NumberFormatException e) { id = 0; }
-
-        if (name == null) throw new Exception("Wrong map");
-
-        if (sDepartments != null && !sDepartments.isEmpty()){
-            for (String s :sDepartments.split("@&")){
-                int depId;
-                try {
-                    depId = Integer.valueOf(s);
-                    departments.add((CarrierDepartment) dbService.findOne(depId, CarrierDepartment.class));
-                }
-                catch (NumberFormatException e) {  }
-            }
-        }
+        checkObjects(map.get("departments"), departments, dbService, CarrierDepartment.class);
 
         return new Carrier(id, name, departments);
     }
