@@ -42,9 +42,9 @@ public class UserController {
             return "index";
         }
 
-        uService.save(user.getLogin(), user.getPassword(), urCOwnership,
+        /*uService.save(user.getLogin(), user.getPassword(), urCOwnership,
                 urCFullName, urCShortName, urCCode,
-                urCContactName, urCContactSurname);
+                urCContactName, urCContactSurname);*/
 
         return "index";
     }
@@ -62,7 +62,7 @@ public class UserController {
             return "index";
         }
 
-        uService.save(user.getLogin(), user.getPassword(), urIName, urISurname);
+//        uService.save(user.getLogin(), user.getPassword(), urIName, urISurname);
 
         return "index";
     }
@@ -77,15 +77,15 @@ public class UserController {
             return "index";
         }
 
-        User fUser = uService.findByLogin(user.getLogin());
+        /*User fUser = uService.findByLogin(user.getLogin());
         Cookie cookie = new Cookie("loggedUserId", String.valueOf(fUser.getId()));
         cookie.setPath("/");
         cookie.setMaxAge(60*60*24*7);
-        res.addCookie(cookie);
+        res.addCookie(cookie);*/
 
-        if (fUser.getLogin().equalsIgnoreCase("admin@admin")) {
+       /* if (fUser.getLogin().equalsIgnoreCase("admin@admin")) {
             return "redirect:/admin/adminPage";
-        }
+        }*/
 
         return "index";
     }
@@ -99,7 +99,7 @@ public class UserController {
         //System.out.println(user);
 //        user = (User) user;
 
-        if (result.hasErrors()) {
+        /*if (result.hasErrors()) {
             model.addAttribute("passRecModDisplay", "block");
             return "index";
         }
@@ -114,7 +114,7 @@ public class UserController {
             }
             double min = (System.currentTimeMillis() - fUser.getCreateTempPassword().getTime())/60000;
             mailService.sendMailRecPass(fUser.getLogin(),fUser.getTempPassword(), (5.0-min));
-        }
+        }*/
         return "index";
     }
 

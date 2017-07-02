@@ -8,14 +8,16 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 public class CompanyUser{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String ownership;
     private String fullName;
     private String shortName;
     private String code;
+
 }

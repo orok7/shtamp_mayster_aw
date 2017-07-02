@@ -24,12 +24,6 @@ public class DataConfig {
 
     @Bean
     public DataSource dataSource(){
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-//        dataSource.setUrl("jdbc:mysql://localhost/smdb_main");
-//        dataSource.setUsername("root");
-//        dataSource.setPassword("root");
-//        return dataSource;
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
         hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/smdb_main");

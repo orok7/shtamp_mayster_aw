@@ -1,15 +1,12 @@
 package eins.service.impl;
 
 import eins.dao.CompanyUserDAO;
-import eins.dao.ContactsDAO;
-import eins.dao.IndividualUserDAO;
 import eins.dao.UserDAO;
-import eins.entity.CompanyUser;
-import eins.entity.Contacts;
-import eins.entity.IndividualUser;
 import eins.entity.User;
 import eins.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,22 +19,20 @@ public class UserServiceImpl implements UserService{
     private UserDAO uDAO;
     @Autowired
     private CompanyUserDAO cuDAO;
-    @Autowired
-    private IndividualUserDAO iuDAO;
-    @Autowired
-    private ContactsDAO cDAO;
 
-    final static double TEMP_PASS_TIME_VALID = 5.0;
+    private final static double TEMP_PASS_TIME_VALID = 5.0;
 
     @Override
     public void save(String userEmail, String userPassword,
                      String userName, String userSurname) {
+/*
 
         IndividualUser iu = new IndividualUser(0, userName, userSurname);
         Contacts contacts = new Contacts(userName, userSurname);
         iuDAO.save(iu);
         cDAO.save(contacts);
         uDAO.save(new User(userEmail, userPassword, false, null, iu, contacts));
+*/
 
     }
 
@@ -46,13 +41,13 @@ public class UserServiceImpl implements UserService{
                      String userFullName, String userShortName, String userCode,
                      String userContactName, String userContactSurname) {
 
-        if (uDAO.findByLogin(userEmail) != null) return;
+        /*if (uDAO.findByLogin(userEmail) != null) return;
         CompanyUser cu = new CompanyUser(0, userOwnership, userFullName, userShortName, userCode);
         Contacts contacts = new Contacts(userContactName, userContactSurname);
         cuDAO.save(cu);
         cDAO.save(contacts);
         uDAO.save(new User(userEmail, userPassword, true, cu, null, contacts));
-
+*/
     }
 
     @Override
@@ -61,8 +56,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findByLogin(String login) {
-        return uDAO.findByLogin(login);
+    public User findByUsername(String username) {
+        return uDAO.findByUsername(username);
     }
 
     @Override
@@ -110,4 +105,8 @@ public class UserServiceImpl implements UserService{
         return true;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return findByUsername(username);
+    }
 }

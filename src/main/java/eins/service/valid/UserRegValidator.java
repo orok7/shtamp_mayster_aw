@@ -21,7 +21,7 @@ public class UserRegValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        User user = (User) target;
+       /* User user = (User) target;
 
         if (user.getLogin() == null || user.getLogin().isEmpty()) {
             errors.rejectValue("login", "450","Необхідно вказати Email");
@@ -38,7 +38,7 @@ public class UserRegValidator implements Validator {
             errors.rejectValue("password", "450","Необхідно вказати пароль та його підтвердити");
         } else if (!user.getPassword().equals(user.getTempPassword())) {
             errors.rejectValue("password", "450","Помилка підтвердження паролю");
-        }
+        }*/
 
     }
 }

@@ -9,16 +9,11 @@ import java.sql.Blob;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String path;
+    private String picture;
 
-    @Override
-    public String toString() {
-        return path.substring(path.lastIndexOf('/')+1);
-    }
 }

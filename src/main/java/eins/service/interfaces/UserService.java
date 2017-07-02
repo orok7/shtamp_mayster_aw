@@ -1,9 +1,10 @@
 package eins.service.interfaces;
 
 import eins.entity.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     void save(String userEmail, String userPassword,
               String userName, String userSurname);
@@ -14,7 +15,7 @@ public interface UserService {
 
     User findOne(int id);
 
-    User findByLogin(String login);
+    User findByUsername(String username);
 
     List<User> findAll();
 

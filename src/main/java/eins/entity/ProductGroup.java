@@ -1,29 +1,23 @@
 package eins.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "product_group")
 public class ProductGroup {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-        private String name;
+    @Column(unique = true)
+    private String name;
 
-        @ManyToOne(fetch = FetchType.LAZY)
-        private ProductGroup parent;
-
-        @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-        private Set<ProductGroup> subGroups = new HashSet<>();
 }

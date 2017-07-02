@@ -10,27 +10,32 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne(fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private ProductGroup productGroup;
+
+    @Column(unique = true)
     private String article;
     private String name;
-    private boolean hasCharacteristic;
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Characteristic> characteristics = new ArrayList<>();
-    @OneToOne(fetch = FetchType.LAZY)
-    private MeasurementUnits measurementUnits;
+
+    @Enumerated(EnumType.STRING)
+    private MeasurementUnits measurementUnits = MeasurementUnits.SHT;
+
     private double price;
     private String description;
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     private List<Image> images = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.MERGE)
     private List<Rating> ratings = new ArrayList<>();
-    @OneToMany(fetch = FetchType.LAZY)
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.MERGE)
     private List<Reviews> reviews = new ArrayList<>();
+
 }

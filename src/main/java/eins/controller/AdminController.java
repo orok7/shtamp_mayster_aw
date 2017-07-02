@@ -25,9 +25,9 @@ public class AdminController {
                             Model model){
         if (loggedUserId != -1) {
             User user = uService.findOne(loggedUserId);
-            if (user.getLogin().equalsIgnoreCase("admin@admin")){
+            /*if (user.getLogin().equalsIgnoreCase("admin@admin")){
                 return "adminPage";
-            }
+            }*/
         }
         return "redirect:/init/index";
     }
