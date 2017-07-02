@@ -1,3 +1,4 @@
+/*
 package eins.service.utils;
 
 import eins.service.interfaces.DbService;
@@ -96,9 +97,11 @@ public class EntityField {
                 "\n\tInputType: " + inputType;
     }
 
-    /*public EntityField init(Field f, String val, DbService dbService) throws ClassNotFoundException {
+    */
+/*public EntityField init(Field f, String val, DbService dbService) throws ClassNotFoundException {
         this.init(f, dbService);
         fieldStringValue = val;
         return this;
-    }*/
-}
+    }*//*
+
+}*/

@@ -1,3 +1,4 @@
+/*
 package eins.service.utils;
 
 import eins.service.interfaces.DbService;
@@ -173,3 +174,4 @@ public class SomeClass {
                 "\nFields:" + fields;
     }
 }
+*/

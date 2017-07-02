@@ -1,7 +1,6 @@
 package eins.entity;
 
 import eins.service.interfaces.DbService;
-import eins.service.utils.Mapable;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,14 +12,14 @@ import java.util.Map;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class CarrierDepartment implements Mapable<CarrierDepartment> {
+public class CarrierDepartment{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Carrier carrier;
     private String name;
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private Address address;
 
     @Override
@@ -28,17 +27,4 @@ public class CarrierDepartment implements Mapable<CarrierDepartment> {
         return (carrier == null)?"null":carrier.getName() + ", " + name + ", " + address;
     }
 
-    @Override
-    public CarrierDepartment parseFromMap(Map<String, String> map, DbService dbService){
-
-        String name = map.get("name");
-
-        int id = checkInt(map.get("id"));
-
-        Carrier carrier = (Carrier) checkObject(map.get("carrier"), dbService, Carrier.class);
-
-        Address address = (Address) checkObject(map.get("address"), dbService, Address.class);
-
-        return new CarrierDepartment(id, carrier, name, address);
-    }
 }

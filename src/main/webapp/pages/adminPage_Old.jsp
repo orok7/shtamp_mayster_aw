@@ -1,3 +1,4 @@
+<%--
 <%@include file="templates/main_parts/head.jsp" %>
 
 <div class="container">
@@ -40,3 +41,4 @@
 
 </body>
 </html>
+--%>

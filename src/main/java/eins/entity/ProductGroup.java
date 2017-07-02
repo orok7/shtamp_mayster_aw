@@ -21,9 +21,9 @@ public class ProductGroup {
 
         private String name;
 
-        @ManyToOne(fetch = FetchType.EAGER)
+        @ManyToOne(fetch = FetchType.LAZY)
         private ProductGroup parent;
 
-        @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+        @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
         private Set<ProductGroup> subGroups = new HashSet<>();
 }

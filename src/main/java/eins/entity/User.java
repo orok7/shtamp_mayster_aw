@@ -41,10 +41,10 @@ public class User {
     @UpdateTimestamp
     private Timestamp createTempPassword;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private CompanyUser companyDate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private IndividualUser individualDate;
 
     @OneToMany(fetch = FetchType.LAZY)
