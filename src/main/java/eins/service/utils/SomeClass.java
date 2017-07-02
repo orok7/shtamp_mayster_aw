@@ -8,10 +8,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Parameter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static org.apache.log4j.lf5.util.LogMonitorAdapter.newInstance;
 
@@ -46,27 +47,125 @@ public class SomeClass {
         return map;
     }
 
-    /*public <T> T getObjectFromMap(Map<String,String> map){
-        return null;
-    }*/
+    public Object getInstance(DbService dbService) throws InvocationTargetException,
+            NoSuchMethodException, InstantiationException, IllegalAccessException,
+            NoSuchFieldException, ClassNotFoundException, ParseException {
 
-//    public Object getInstance(DbService dbService) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-//        if (fields == null || entityClass == null) return null;
-//
-//        Constructor<?> allArgs = null;
-//        Constructor<?>[] constructors = entityClass.getConstructors();
-//        for (Constructor<?> con: constructors) {
-//            if (fields.size() == con.getParameterCount()) {
-//                allArgs = con;
-//            }
-//        }
-//        if (allArgs == null) return null;
-//
-//        Parameter[] parameters = allArgs.getParameters();
-//        Object o = allArgs.newInstance(-1, -2, -3);
-//
-//        return o;
-//    }
+        if (fields == null || entityClass == null) return null;
+
+        Object o = ClassUtil.newInstance(entityClass);
+        for (EntityField field : fields) {
+            parseThis(o, field, dbService);
+        }
+
+
+        return o;
+    }
+
+    private void parseThis(Object inner, EntityField field, DbService dbService)
+            throws NoSuchFieldException, IllegalAccessException, ClassNotFoundException,
+            NoSuchMethodException, InstantiationException, InvocationTargetException,
+            ParseException {
+
+        Field objField = entityClass.getDeclaredField(field.getFieldName());
+        objField.setAccessible(true);
+
+        if (Number.class.isAssignableFrom(objField.getType())) {
+            parseNumber(inner, field.getFieldStringValue(), field.getFieldName());
+            return;
+        }
+
+        if (field.getFieldType().getName().startsWith("eins.entity")) {
+            objField.set(inner, parseObject(field.getFieldStringValue(), dbService, field.getFieldType()));
+            return;
+        }
+
+        if (Collection.class.isAssignableFrom(objField.getType())){
+            objField.set(inner, parseObject(field.getFieldStringValue(), dbService, field.getFieldType()));
+            return;
+        }
+
+        if (Boolean.class.isAssignableFrom(objField.getType())) {
+            objField.set(inner, field.getFieldStringValue().equalsIgnoreCase("true"));
+            return;
+        }
+
+        if (Date.class.isAssignableFrom(objField.getType())) {
+            objField.set(inner, parseDate(field.getFieldStringValue()));
+            return;
+        }
+
+        if (String.class.isAssignableFrom(objField.getType()))
+            objField.set(inner, field.getFieldStringValue());
+
+    }
+
+    private Date parseDate(String sDate) throws ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date parse = df.parse(sDate);
+        return parse;
+    }
+
+    private void parseNumber (Object inner, String val, String fieldName) throws ClassNotFoundException, IllegalAccessException,
+            InvocationTargetException, InstantiationException, NoSuchMethodException, NoSuchFieldException {
+
+        Class<?> innerClass = inner.getClass();
+        Field f = innerClass.getDeclaredField(fieldName);
+        f.setAccessible(true);
+
+        String classFullName = "java.lang.";
+        Class<?> ftype = f.getType();
+
+        if (!ftype.isPrimitive()){
+            if (Number.class.isAssignableFrom(ftype)) {
+                classFullName += ftype.getSimpleName();
+
+            } else return;
+        }else {
+            String fTypeName = ftype.getSimpleName();
+
+            if (fTypeName.equalsIgnoreCase("int"))
+                classFullName = "Integer";
+
+            else classFullName += fTypeName.substring(0, 1).toUpperCase() +
+                    fTypeName.substring(1);
+        }
+
+        Class<?> cNum = Class.forName(classFullName);
+        Object o;
+        try { o = cNum.getConstructor(String.class).newInstance(val); }
+        catch (Exception e)
+        { o = cNum.getConstructor(String.class).newInstance("0"); }
+
+        f.set(inner, o);
+
+    }
+
+    private int checkInt(String strInt){
+        int Int;
+        try { Int = Integer.valueOf(strInt); } catch (NumberFormatException e) {Int = 0;}
+        return Int;
+    }
+
+    private Object parseObject(String strId, DbService dbService, Class<?> clazz){
+        int id;
+        try { id = Integer.valueOf(strId); } catch (NumberFormatException e) { id = -1;}
+        if (id != -1) return dbService.findOne(id, clazz);
+        return null;
+    }
+
+    private <TT> void parseObjects(String strIds, List<TT> list, DbService dbService, Class<?> clazz){
+        if (strIds != null && !strIds.isEmpty()){
+            for (String s :strIds.split("@&")){
+                int depId;
+                try {
+                    depId = Integer.valueOf(s);
+                    list.add((TT)dbService.findOne(depId, clazz));
+                }
+                catch (NumberFormatException e) {  }
+            }
+        }
+    }
 
     @Override
     public String toString() {

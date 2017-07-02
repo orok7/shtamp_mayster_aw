@@ -29,11 +29,7 @@ public class EntityField {
         return this;
     }
 
-    public EntityField init(Field f, String val, DbService dbService) throws ClassNotFoundException {
-        this.init(f, dbService);
-        fieldStringValue = val;
-        return this;
-    }
+
 
     public EntityField initInputType(Field f, DbService dbService) throws ClassNotFoundException {
 
@@ -99,4 +95,10 @@ public class EntityField {
                 "\n\tObjValue: " + fieldObjectValue +
                 "\n\tInputType: " + inputType;
     }
+
+    /*public EntityField init(Field f, String val, DbService dbService) throws ClassNotFoundException {
+        this.init(f, dbService);
+        fieldStringValue = val;
+        return this;
+    }*/
 }

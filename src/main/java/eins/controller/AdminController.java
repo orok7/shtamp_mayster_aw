@@ -44,7 +44,7 @@ public class AdminController {
 
         className = packageName + "." + className;
         SomeClass someEntity = new SomeClass(className, dbService);
-        System.out.println(someEntity.getEntityClass());
+//        System.out.println(someEntity.getEntityClass());
 
         someEntity.setFields(someEntity.getFields()
                 .stream()
@@ -60,14 +60,17 @@ public class AdminController {
                 })
         .collect(Collectors.toList()));
 
-        Map<String,String> map = someEntity.getFieldsMap();
-        System.out.println(map);
+//        Map<String,String> map = someEntity.getFieldsMap();
+//        System.out.println(map);
+//
+//        Mapable<?> mapable = (Mapable<?>) ClassUtil.newInstance(someEntity.getEntityClass());
+//
+//        Object o = mapable.parseFromMap(map, dbService);
+//
+//        System.out.println(o.getClass());
+//        System.out.println(o);
 
-        Mapable<?> mapable = (Mapable<?>) ClassUtil.newInstance(someEntity.getEntityClass());
-
-        Object o = mapable.parseFromMap(map, dbService);
-
-        System.out.println(o.getClass());
+        Object o = someEntity.getInstance(dbService);
         System.out.println(o);
 
         dbService.save(o,someEntity.getEntityClass());

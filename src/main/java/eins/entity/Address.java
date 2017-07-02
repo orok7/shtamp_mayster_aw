@@ -24,7 +24,7 @@ public class Address implements Mapable<Address> {
 
     @Override
     public String toString() {
-        return /*city + */", вул." + street +
+        return city + ", вул." + street +
                 ", " + building +
                 "/ " + room;
     }
