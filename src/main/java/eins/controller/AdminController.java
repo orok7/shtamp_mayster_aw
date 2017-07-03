@@ -14,22 +14,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping("/logout")
-    public String logout() {
-
-        return "redirect:/user/logout";
-    }
+//    @GetMapping("/logout")
+//    public String logout() {
+//
+//        return "redirect:/user/logout";
+//    }
 
     @GetMapping("/adminPage")
-    public String adminPage(@CookieValue(value = "loggedUserId", defaultValue = "-1") int loggedUserId,
-                            Model model){
-        if (loggedUserId != -1) {
-            User user = uService.findOne(loggedUserId);
-            /*if (user.getLogin().equalsIgnoreCase("admin@admin")){
-                return "adminPage";
-            }*/
-        }
-        return "redirect:/init/index";
+    public String adminPage(){
+
+        return "adminPage";
     }
 
 

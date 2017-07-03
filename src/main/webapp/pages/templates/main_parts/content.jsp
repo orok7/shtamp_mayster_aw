@@ -11,6 +11,16 @@
             </div>
         </c:forEach>
     </div>
+
+    <div class="conteiner">
+        <sec:authorize access="isAuthenticated()">
+            <h1>Welcome <sec:authorize access="hasRole('ADMIN')">
+                <a href="/admin/adminPage">to admin page</a>
+            </sec:authorize>!!</h1>
+        </sec:authorize>
+
+    </div>
+
     <div class="page-select">
         <c:if test="${pageNum > 1}">
         <a href="/toFirstPage" title="На початок"><<&nbsp;&nbsp;</a>

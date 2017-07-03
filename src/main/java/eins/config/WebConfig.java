@@ -32,19 +32,19 @@ public class WebConfig extends WebMvcConfigurerAdapter{
                 .addResourceLocations("/pages/img/");
         registry
                 .addResourceHandler("/css/**")
-                .addResourceLocations("/styles/");
+                .addResourceLocations("/static/styles/");
         registry
                 .addResourceHandler("/bs_css/**")
-                .addResourceLocations("/styles/bs_styles/css/");
+                .addResourceLocations("/static/bs_styles/css/");
         registry
                 .addResourceHandler("/bs_js/**")
-                .addResourceLocations("/styles/bs_styles/js/");
+                .addResourceLocations("/static/bs_styles/js/");
         registry
                 .addResourceHandler("/my_js/**")
-                .addResourceLocations("/styles/js/");
+                .addResourceLocations("/static/js/");
         registry
                 .addResourceHandler("/bs/fonts/**")
-                .addResourceLocations("/styles/bs_styles/fonts/");
+                .addResourceLocations("/static/bs_styles/fonts/");
     }
 
     @Bean

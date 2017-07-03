@@ -118,14 +118,17 @@
             submitReg.disabled = true;
         }
     }
+    console.log("reloadAccepted()");
     reloadAccepted();
 </script>
 
 <script>
+    console.log("2()");
     var regIsCompany = document.getElementById('urIsCompany');
     var regIndividualData = document.getElementById('urIndividualData');
     var regCompanyData = document.getElementById("urCompanyData");
     regIsCompany.onclick = function () {
+        console.log("regIsCompany.onclick");
         if (regIsCompany.checked) {
             regIndividualData.style.display = "none";
             regCompanyData.style.display = "block";
@@ -143,9 +146,11 @@
 </script>
 
 <script>
+    console.log("3");
     var isAccepted = document.getElementById('isAccepted');
     var submitReg = document.getElementById('submitReg');
     isAccepted.onclick = function () {
+        console.log("isAccepted.onclick");
         if (isAccepted.checked) {
             submitReg.disabled = false;
         } else {

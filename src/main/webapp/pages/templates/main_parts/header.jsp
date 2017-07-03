@@ -43,7 +43,7 @@
              style="height: 103px;">
 
             <div style="width: 96%;height: 46%;/*margin: 2%*/">
-                <a class="naul" href="/user/logining"><button class="btn btn-success btn-block">Вхід</button></a>
+                <a class="naul" href="/login<%--/user/logining--%>"><button class="btn btn-success btn-block">Вхід</button></a>
             </div>
 
             <div style="width: 96%;height: 46%;/*margin: 2%*/">

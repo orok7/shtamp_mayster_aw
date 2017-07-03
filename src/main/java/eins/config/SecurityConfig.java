@@ -75,11 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").access("hasRole('ADMIN')")
                 .and()
                 .formLogin()
-//                .loginPage("/index.jsp")
+//                .loginPa14784ge("/index.jsp")
 //                .passwordParameter("username")
 //                .usernameParameter("password")
-//                .defaultSuccessUrl("/index.jsp")
-//                .failureUrl("/index.jsp?error=true")
                 .and()
                 .csrf();
     }
