@@ -2,30 +2,17 @@
 <link rel="stylesheet" href="/css/modal_registration.css">
 
 
-<sf:form id="formReg" class="form-horizontal" action="/user/regIndividualUser" method="post" modelAttribute="regUser">
+<form id="formReg" class="form-horizontal" action="/user/regIndividualUser" method="post">
 
     <div class="checkbox">
-        <label><input type="checkbox" name="urIsCompany" id="urIsCompany"> Обліковий запис для юридичної особи</label>
+        <label><input type="checkbox" name="urIsCompany" id="urIsCompany">
+            Обліковий запис для юридичної особи
+        </label>
     </div>
 
     <hr>
-    <div class="form-group" id="urIndividualData">
 
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="urIName">Ім'я:</label>
-            <div class="col-sm-7">
-                <input class="form-control uData" id="urIName" type="text" name="urIName" placeholder="Петро" required>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="urISurname">Прізвище:</label>
-            <div class="col-sm-7">
-                <input class="form-control uData" id="urISurname" type="text" name="urISurname" placeholder="Петрів" required>
-            </div>
-        </div>
-
-    </div>
+    <%-- Company Data --%>
 
     <div class="form-group" id="urCompanyData">
 
@@ -73,39 +60,50 @@
 
     </div>
 
+    <%--Main Data--%>
+
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="urIName">Ім'я:</label>
+        <div class="col-sm-7">
+            <input class="form-control uData" id="urIName" type="text" name="urIName" placeholder="Петро" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-4" for="urISurname">Прізвище:</label>
+        <div class="col-sm-7">
+            <input class="form-control uData" id="urISurname" type="text" name="urISurname" placeholder="Петрів" required>
+        </div>
+    </div>
+
     <div class="form-group">
         <label class="control-label col-sm-4" for="urEmail">Email:</label>
         <div class="col-sm-7">
-            <sf:input type="email" class="form-control" id="urEmail"
-                      path="login" placeholder="Введіть Ваш Email"/>
+            <input type="email" class="form-control" id="urEmail" placeholder="Введіть Ваш Email"/>
         </div>
     </div>
 
     <div class="form-group">
         <label class="control-label col-sm-4" for="urPassword">Пароль:</label>
         <div class="col-sm-7">
-            <sf:input type="password" class="form-control" id="urPassword"
-                      path="password" placeholder="password"/>
+            <input type="password" class="form-control" id="urPassword" placeholder="password"/>
         </div>
     </div>
 
     <div class="form-group">
         <label class="control-label col-sm-4" for="urPasswordAg">Підтвердіть пароль:</label>
         <div class="col-sm-7">
-            <sf:input type="password" class="form-control" id="urPasswordAg"
-                      path="tempPassword" placeholder="password"/>
+            <input type="password" class="form-control" id="urPasswordAg" placeholder="password"/>
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-7">
             <button type="submit" class="btn btn-success btn-block">Зареєструвати</button>
-            <span style="color: red"><sf:errors path="login"/></span>
-            <span style="color: red"><sf:errors path="password"/></span>
         </div>
     </div>
 
-</sf:form>
+</form>
 
 
 

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<sf:form class="form-horizontal" action="/user/login" method="post"
+<sf:form class="form-horizontal" action="/logMe" method="post"
          modelAttribute="loggedUser">
 
     <div class="form-group">

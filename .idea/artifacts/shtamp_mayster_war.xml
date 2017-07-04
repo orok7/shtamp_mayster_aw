@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="shtamp_mayster:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="shtamp_mayster-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="shtamp_mayster:war exploded" />
+    </root>
+  </artifact>
+</component>
