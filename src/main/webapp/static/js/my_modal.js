@@ -1,4 +1,19 @@
-function my_modal(blockId, closeBtnId) {
+function my_modal(blockId, closeId) {
+    console.log('func');
+    var block = document.getElementById(blockId);
+    var cBtn = document.getElementById(closeId);
+    $(block).css('display', 'block');
+    $(cBtn).click(function () {
+        $(block).css('display', 'none');
+    });
+    $(block).click(function (e) {
+        if (e.target == block) {
+            $(block).css('display', 'none');
+        }
+    });
+};
+
+function my_modal_old(blockId, closeBtnId) {
     var block1 = document.getElementById(blockId);
     var closeBtn = document.getElementById(closeBtnId);
 
@@ -13,7 +28,4 @@ function my_modal(blockId, closeBtnId) {
             block1.style.display = "none";
         }
     }
-    /*block.onclick = function () {
-            block.style.display = "none";
-    }*/
 }

@@ -43,11 +43,11 @@
              style="height: 103px;">
 
             <div style="width: 96%;height: 46%;/*margin: 2%*/">
-                <a class="naul" href="/user/logining<%--/user/logining--%>"><button class="btn btn-success btn-block">Вхід</button></a>
+                <button id='login_btn' class="btn btn-success btn-block">Вхід</button>
             </div>
 
             <div style="width: 96%;height: 46%;/*margin: 2%*/">
-                <a class="naul" href="/user/registration"><button class="btn btn-success btn-block">Реєстрація</button></a>
+                <button id='reg_btn' class="btn btn-success btn-block">Реєстрація</button>
             </div>
 
         </div>
@@ -59,3 +59,7 @@
 <div class="mylogo">
     <a href="/" style="display: block; width: 100%; height: 100%" title="На головну"></a>
 </div>
+
+<script>
+
+</script>

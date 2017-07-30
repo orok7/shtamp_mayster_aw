@@ -8,7 +8,7 @@
 
         <div class="col-sm-10">
             <input type="email" class="form-control" id="prEmail"
-                   placeholder="Введіть Ваш Email"/>
+                   name="username" placeholder="Введіть Ваш Email"/>
         </div>
 
     </div>
@@ -23,9 +23,7 @@
 
             <hr style="margin-bottom: 0">
 
-            <a href="/user/registration">
-                <button type="button" class="btn btn-link fright">Зареєструватися</button>
-            </a>
+            <button id="regFPR_btn" type="button" class="btn btn-link fright">Зареєструватися</button>
 
         </div>
     </div>

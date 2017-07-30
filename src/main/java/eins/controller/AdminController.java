@@ -1,3 +1,4 @@
+/*
 package eins.controller;
 
 import eins.entity.User;
@@ -42,4 +43,4 @@ public class AdminController {
     @Autowired
     private DbService dbService;
 
-}
+}*/

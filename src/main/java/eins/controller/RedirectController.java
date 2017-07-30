@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.InvocationTargetException;
 
 @Controller
-@RequestMapping("/init")
+@RequestMapping("/main")
 public class RedirectController {
 
     @GetMapping("/index")

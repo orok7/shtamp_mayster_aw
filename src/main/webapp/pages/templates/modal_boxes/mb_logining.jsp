@@ -10,6 +10,7 @@
         </div>
 
         <div class="my-modal-body">
+            <%--<%@include file="../../login.jsp" %>--%>
             <%@include file="../forms/f_login.jsp" %>
         </div>
 

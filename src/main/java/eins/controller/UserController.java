@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +26,6 @@ import java.util.function.Supplier;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
 
     @PostMapping("/regCompanyUser")
     public String regCompanyUser(@RequestParam String urCOwnership,
@@ -132,39 +132,6 @@ public class UserController {
 
     //////////////////////////////////////////////////////////////////////////
 
-
-    @GetMapping("/logining")
-    public String logining(Model model) {
-        model.addAttribute("loginingModDisplay", "block");
-        return "index";
-    }
-
-
-
-    @GetMapping("/logouting")
-    public String logouting(Model model) {
-        model.addAttribute("logoutingModDisplay", "block");
-        return "redirect:/";
-    }
-
-
-
-    @GetMapping("/passrecovering")
-    public String passrecovering(Model model) {
-        model.addAttribute("passRecModDisplay", "block");
-        return "index";
-    }
-
-
-
-    @GetMapping("/registration")
-    public String registration(Model model) {
-        model.addAttribute("regModDisplay", "block");
-        return "index";
-    }
-
-
-    ///////////////////////////////////////////////////////////////////
 
 
     @InitBinder("passrecUser")
